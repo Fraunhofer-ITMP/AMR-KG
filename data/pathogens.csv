@@ -1,0 +1,179 @@
+ID,Pathogens
+1,Rickettsia rickettsii
+2,Anaplasma
+3,Viridans streptococci
+4,Brucella
+5,Staphylococcus aureus
+6,Bacillus stearothermophilus
+7,Enterococcus maloratus
+8,Prevotella melaninogenica (previously called Bacteroides melaninogenicus)
+9,Leptospira noguchii
+10,Bacillus brevis
+11,Haemophilus ducreyi
+12,Vibrio
+13,Mycoplasma penetrans
+14,Rhizobium radiobacter
+15,Lactococcus lactis
+16,Campylobacter fetus
+17,Listeria monocytogenes
+18,Microbacterium multiforme
+19,Mycoplasma pneumoniae
+20,Pasteurella
+21,Streptococcus bovis
+22,Azotobacter vinelandii
+23,Bacillus thuringiensis
+24,Streptococcus mitis
+25,Mycobacterium bovis
+26,Enterobacter cloacae
+27,Ehrlichia chaffeensis
+28,Streptococcus mitior
+29,Haemophilus parainfluenzae
+30,Bacteroides melaninogenicus (now known as Prevotella melaninogenica)
+31,Rickettsia
+32,Legionella pneumophila
+33,Corynebacterium fusiforme
+34,Clostridium perfringens (previously called Clostridium welchii)
+35,Mycoplasma hominis
+36,Rickettsia quintana
+37,Gardnerella vaginalis
+38,Lactobacillus casei
+39,Burkholderia mallei
+40,Rochalimaea quintana
+41,Bacillus fusiformis
+42,Porphyromonas gingivalis
+43,Burkholderia pseudomallei
+44,Bacillus megaterium
+45,Coxiella burnetii
+46,Bartonella henselae
+47,Streptococcus rattus
+48,Brucella melitensis
+49,Lactobacillus
+50,Yersinia enterocolitica
+51,Campylobacter pylori
+52,Bacillus anthracis
+53,Lactobacillus bulgaricus
+54,Rickettsia psittaci
+55,Corynebacterium diphtheriae
+56,Mycobacterium phlei
+57,Haemophilus influenzae
+58,Haemophilus vaginalis
+59,Clostridium
+60,Chlamydophila psittaci (previously called Chlamydia psittaci)
+61,Fusobacterium nucleatum
+62,Rickettsia prowazekii
+63,Chlamydophila
+64,Burkholderia cepacia
+65,Streptococcus agalactiae
+66,Clostridium difficile
+67,Bacteroides fragilis
+68,Mycoplasma
+69,Leptospira interrogans
+70,Mycobacterium avium
+71,Spirillum volutans
+72,Streptococcus
+73,Salmonella typhi
+74,Ureaplasma urealyticum
+75,Neisseria meningitidis
+76,Enterococcus
+77,Streptococcus salivarius
+78,Clostridium tetani
+79,Eikenella corrodens
+80,Pasteurella multocida
+81,Enterococcus faecalis
+82,Salmonella
+83,Bacillus
+84,Enterococcus durans
+85,Bartonella
+86,Yersinia
+87,Bordetella bronchiseptica
+88,Helicobacter pylori
+89,Streptococcus faceium
+90,Mycobacterium leprae
+91,Fusobacterium necrophorum
+92,Agrobacterium tumefaciens
+93,Enterococcus avium
+94,Moraxella catarrhalis
+95,Bacillus licheniformis
+96,Treponema
+97,Bartonella quintana
+98,Streptococcus lactis
+99,Neisseria gonorrhoeae
+100,Streptococcus gallinarum
+101,Acinetobacter baumannii
+102,Streptococcus sanguis
+103,Acetobacter aurantius
+104,Yersinia pestis
+105,Brucella abortus
+106,Staphylococcus
+107,Shigella dysenteriae
+108,Rochalimaea
+109,Vibrio parahaemolyticus
+110,Chlamydia
+111,Escherichia coli
+112,Enterococcus gallinarum
+113,Rickettsia trachomae
+114,Azorhizobium caulinodans
+115,Bacteroides
+116,Haemophilus
+117,Rothia dentocariosa
+118,Agrobacterium radiobacter
+119,Ehrlichia ewingii
+120,Clostridium botulinum
+121,Micrococcus luteus
+122,Mycobacterium intracellulare
+123,Pseudomonas aeruginosa
+124,Burkholderia
+125,Mycobacterium tuberculosis
+126,Streptococcus pneumoniae
+127,Bordetella pertussis
+128,Brucella suis
+129,Mycobacterium diphtheriae
+130,Mycobacterium smegmatis
+131,Bacillus mycoides
+132,Campylobacter coli
+133,Neisseria
+134,Staphylococcus epidermidis
+135,Borrelia burgdorferi
+136,Calymmatobacterium granulomatis
+137,Campylobacter
+138,Leishmania donovani
+139,Lactobacillus acidophilus
+140,Rochalimaea henselae
+141,Streptococcus pyogenes
+142,Mycoplasma mexican
+143,Peptostreptococcus
+144,Klebsiella pneumoniae
+145,Pasteurella tularensis
+146,Methanobacterium extroquens
+147,Streptococcus faecalis
+148,Vibrio comma
+149,Streptococcus cricetus
+150,Vibrio cholerae
+151,Salmonella typhimurium
+152,Streptococcus ferus
+153,Bacillus cereus
+154,Stenotrophomonas maltophilia
+155,Vibrio vulnificus
+156,Enterococcus faecium
+157,Serratia marcescens
+158,Corynebacterium
+159,Campylobacter jejuni
+160,Mycoplasma fermentans
+161,Actinomyces israelii
+162,Salmonella enteritidis
+163,Haemophilus pertussis
+164,Streptococcus sobrinus
+165,Streptococcus oralis
+166,Mycobacterium lepraemurium
+167,Streptococcus avium
+168,Anaplasma phagocytophilum
+169,Bacillus subtilis
+170,Yersinia pseudotuberculosis
+171,Chlamydophila pneumoniae (previously called Chlamydia pneumoniae)
+172,Bordetella
+173,Streptococcus mutans
+174,Wolbachiahhvfdejj
+175,Bacteroides gingivalis
+176,Chlamydia trachomatis
+177,Mycobacterium
+178,Mycoplasma genitalium

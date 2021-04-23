@@ -1,0 +1,19 @@
+#!/bin/bash
+VERSION=4.2.5
+
+if [ ! -f neo4j-community-${VERSION}-unix.tar.gz ]; then
+  wget -q http://dist.neo4j.org/neo4j-community-${VERSION}-unix.tar.gz
+fi
+
+tar -xvf neo4j-community-${VERSION}-unix.tar.gz
+mv neo4j-community-${VERSION} neo4j-community
+mv neo4j-community ${CONDA_DIR}/
+rm neo4j-community-${VERSION}-unix.tar.gz
+
+echo "dbms.connectors.default_listen_address=0.0.0.0" >> ${CONDA_DIR}/neo4j-community/conf/neo4j.conf
+
+# neo4j has a default password: neo4j
+# However, if you log in with that, the session will soon time out
+# and you will be required to update the original default password 
+${CONDA_DIR}/neo4j-community/bin/neo4j-admin set-initial-password neo4jbinder
+

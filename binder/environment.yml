@@ -1,0 +1,9 @@
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+- openjdk=11
+- neo4j-python-driver
+- pandas
+- jupyter-server-proxy

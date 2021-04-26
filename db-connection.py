@@ -55,7 +55,7 @@ def main():
         pwd="root"  # Change according to user
     )
 
-    conn.query("CREATE OR REPLACE DATABASE wptest")
+    conn.query("CREATE OR REPLACE DATABASE test")
 
     # Create person nodes
     create_person = """
@@ -64,7 +64,7 @@ def main():
         name: row.Contact, email: row.email,
         orcid: 'https://orcid.org/0000-0001-7655-2459'})
         """
-    conn.query(create_person, db='wptest')
+    conn.query(create_person, db='test')
 
     # Creates institute nodes
     create_institute = """
@@ -72,7 +72,7 @@ def main():
     CREATE (i:Institute {id: toInteger(row.ID),
     name: row.Institute})
     """
-    conn.query(create_institute, db='wptest')
+    conn.query(create_institute, db='test')
 
     # Create project nodes
     create_project = """
@@ -80,25 +80,16 @@ def main():
     CREATE (p:Project {id: toInteger(row.ID),
     name: row.Project})
     """
-    conn.query(create_project, db='wptest')
+    conn.query(create_project, db='test')
 
     # Add Project -> Institute edges
-    add_institute_data = """
-    LOAD CSV WITH HEADERS FROM 'file:///competences.csv' AS row
-    WITH row where row.Focus1 is not null
-    MATCH (p:Project {id: toInteger(row.ID)}),
-    (i:Institute {id: toInteger(row.Focus1)}) 
-    CREATE (i)-[w:PROJECT {name: 'Focus1'}]->(p)
-    WITH row where row.Focus2 is not null
-    MATCH (p:Project {id: toInteger(row.ID)}),
-    (i:Institute {id: toInteger(row.Focus2)}) 
-    CREATE (i)-[w:PROJECT {name: 'Focus2'}]->(p)
-    WITH row where row.Focus3 is not null
-    MATCH (p:Project {id: toInteger(row.ID)}),
-    (i:Institute {id: toInteger(row.Focus3)}) 
-    CREATE (i)-[w:PROJECT {name: 'Focus3'}]->(p)
-    """
-    conn.query(add_institute_data, db='wptest')
+    for i in range(1, 4):
+        add_institute_data = "LOAD CSV WITH HEADERS FROM 'file:///competences.csv' AS row " + \
+                             f"WITH row where row.Focus{i} is not null " + \
+                             "MATCH (p:Project {id: toInteger(row.ID)})," + \
+                             "(i:Institute {id: toInteger(" + f"row.Focus{i})" + "}) " + \
+                             "CREATE (i)-[w:PROJECT {name:" + f"'Focus{i}'" + "}]->(p)"
+        conn.query(add_institute_data, db='test')
 
     # Add Institute -> Person data
     add_person = """
@@ -107,7 +98,7 @@ def main():
     (d:Project {id: toInteger(row.projectID)})
     CREATE (d)-[:PEOPLE]->(p)
     """
-    conn.query(add_person, db='wptest')
+    conn.query(add_person, db='test')
 
     # Add person meta data such as skills and pathogens
 
@@ -117,126 +108,33 @@ def main():
     CREATE (s:Skill {id: toInteger(row.ID),
     skill: row.Skill})
     """
-    conn.query(create_skills, db='wptest')
+    conn.query(create_skills, db='test')
 
     create_pathogens = """
     LOAD CSV WITH HEADERS FROM 'file:///pathogens.csv' AS row
     CREATE (b:Bacteria {id: toInteger(row.ID),
     pathogen: row.Pathogens})
     """
-    conn.query(create_pathogens, db='wptest')
+    conn.query(create_pathogens, db='test')
 
     # Person -> Skill
-    add_skill_data = """
-    LOAD CSV WITH HEADERS FROM 'file:///person.csv' AS row
-    WITH row where row.Skill_1 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_1)})
-    CREATE (p)-[:SKILLS]->(s)
-    WITH row where row.Skill_2 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_2)})
-    CREATE (p)-[:SKILLS]->(s)
-    WITH row where row.Skill_3 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_3)})
-    CREATE (p)-[:SKILLS]->(s)
-    WITH row where row.Skill_4 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_4)})
-    CREATE (p)-[:SKILLS]->(s)
-    WITH row where row.Skill_5 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_5)})
-    CREATE (p)-[:SKILLS]->(s)
-    WITH row where row.Skill_6 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (s:Skill {id: toInteger(row.Skill_6)})
-    CREATE (p)-[:SKILLS]->(s)
-    """
-    conn.query(add_skill_data, db='wptest')
+    for i in range(1, 7):
+        add_skill_data = "LOAD CSV WITH HEADERS FROM 'file:///person.csv' AS row " + \
+                         f"WITH row where row.Skill_{i} is not null " + \
+                         "MATCH (p:Person {id: toInteger(row.ID)})," + \
+                         "(s:Skill {id: toInteger(" + f"row.Skill_{i})" + "})" + \
+                         "CREATE (p)-[:SKILLS]->(s)"
+        conn.query(add_skill_data, db='test')
 
     # Person -> Pathogen
-    add_bacterial_data = """
-    LOAD CSV WITH HEADERS FROM 'file:///person.csv' AS row
-    WITH row where row.Pathogen_1 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_1)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_2 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_2)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_3 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_3)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_4 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_4)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_5 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_5)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_6 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_6)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_7 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_7)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_8 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_8)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_9 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_9)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_10 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_10)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_11 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_11)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_12 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_12)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_13 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_13)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_14 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_14)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_15 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_15)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_16 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_16)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_17 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_17)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_18 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_18)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    WITH row where row.Pathogen_19 is not null
-    MATCH (p:Person {id: toInteger(row.ID)}),
-    (b:Bacteria {id: toInteger(row.Pathogen_19)})
-    CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)
-    """
-    conn.query(add_bacterial_data, db='wptest')
+    for i in range(1, 20):
+        add_bacterial_data = "LOAD CSV WITH HEADERS FROM 'file:///person.csv' AS row " + \
+                             f"WITH row where row.Pathogen_{i} is not null " + \
+                             "MATCH (p:Person {id: toInteger(row.ID)})," + \
+                             "(b:Bacteria {id: toInteger(" + f"row.Pathogen_{i})" + "})" + \
+                             "CREATE (p)-[:PATHOGEN {name: 'Specializes_in'}]->(b)"
+
+        conn.query(add_bacterial_data, db='test')
 
 
 if __name__ == '__main__':

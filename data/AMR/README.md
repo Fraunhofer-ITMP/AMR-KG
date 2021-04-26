@@ -31,13 +31,13 @@ For addition of new data intp the respective [person.csv]() files, follow the st
 
 5. This will direct you to the editing mode for the file.
 
-![image](https://user-images.githubusercontent.com/45199062/116063264-11893d00-a685-11eb-8523-a03bf100ae5c.png)
+![image](https://user-images.githubusercontent.com/45199062/116067299-53b47d80-a689-11eb-976e-cefe162ddd8d.png)
 
 On the new line start by filling the details as mentioned in the first row which is the column header. Remember to seperate data in the different columns with just a comma. Althernatively, you can copy the data from the previous line and change the replace the data with your information.  
 
 You can check that the data is getting stored in the correct order by making use of the `preview changes` tab.
 
-![image](https://user-images.githubusercontent.com/45199062/116063689-8d838500-a685-11eb-8fed-49128609396a.png)
+![image](https://user-images.githubusercontent.com/45199062/116067116-27006600-a689-11eb-8f77-c086b8e3334c.png)
 
 
 6. Once you are confident of the information you have filled, click the `commit new file` button at the bottom of the page to save the information.

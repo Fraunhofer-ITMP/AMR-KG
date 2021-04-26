@@ -16,4 +16,7 @@ echo "dbms.connectors.default_listen_address=0.0.0.0" >> ${CONDA_DIR}/neo4j-comm
 # However, if you log in with that, the session will soon time out
 # and you will be required to update the original default password 
 ${CONDA_DIR}/neo4j-community/bin/neo4j-admin set-initial-password neo4jbinder
-
+cp -R data ${CONDA_DIR}/neo4j-community/import
+CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf
+echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
+echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE

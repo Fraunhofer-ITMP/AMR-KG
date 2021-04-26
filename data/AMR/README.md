@@ -9,6 +9,8 @@ Yojana Gadiya,Yojana.Gadiya@itmp.fraunhofer.de,0000-0002-7683-0452,Fraunhofer IT
 
 A [person.csv]() file is present in each project. We encourage you to look into your respective project directory and fill in the data to keep the knowledge base updated.
 
+**If you do not have an ORCID, we would apppreciate you to register with an ORCID before updating you data. You can sign-up [here](https://orcid.org/)**
+
 # How to add new data?
 
 For addition of new data intp the respective [person.csv]() files, follow the steps below:
@@ -31,7 +33,7 @@ For addition of new data intp the respective [person.csv]() files, follow the st
 
 ![image](https://user-images.githubusercontent.com/45199062/116063264-11893d00-a685-11eb-8523-a03bf100ae5c.png)
 
-On the new line start by filling the details as mentioned in the first row which is the column header. Remember to seperate data in the different columns with just a comma. Althernatively, you can copy the data from the previous line and change the replace the data with your information. 
+On the new line start by filling the details as mentioned in the first row which is the column header. Remember to seperate data in the different columns with just a comma. Althernatively, you can copy the data from the previous line and change the replace the data with your information.  
 
 You can check that the data is getting stored in the correct order by making use of the `preview changes` tab.
 

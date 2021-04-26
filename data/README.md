@@ -40,7 +40,7 @@ You can check that the data is getting stored in the correct order by making use
 ![image](https://user-images.githubusercontent.com/45199062/116067116-27006600-a689-11eb-8f77-c086b8e3334c.png)
 
 
-6. Once you are confident of the information you have filled, click the `commit new file` button at the bottom of the page to save the information.
+6. Once you are confident of the information you have filled, click the `commit changes` button at the bottom of the page to save the information.
 
 ![image](https://user-images.githubusercontent.com/45199062/116063923-d0ddf380-a685-11eb-9e7f-35472fb058f3.png)
 

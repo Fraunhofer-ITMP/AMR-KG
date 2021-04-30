@@ -1,5 +1,47 @@
 #!/bin/bash
 VERSION=4.2.5
+BLOOM_VERSION=1.6.1
+
+VNC_APPLICATION_DIR=$CONDA_DIR/vnc
+mkdir $VNC_APPLICATION_DIR
+pushd $VNC_APPLICATION_DIR
+
+# Novnc: just want web files
+curl -sSfL https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz | tar -zxf -
+
+# Patch novnc to use correct path to websockify (defaults to /)
+# Note if you use vnc.html you will need to patch ui.js to use the correct path
+# and also to override localstorage which may store an incorrect path from a
+# different session
+# Also resize server instead of scaling client
+sed -i.bak \
+    -e "s%\('path', 'websockify'\)%'path', window.location.pathname.replace(/[^/]*$/, '').substring(1) + 'websockify'); console.log('websockify path:' + path%" \
+    -re "s%rfb.scaleViewport = .+%rfb.resizeSession = readQueryVariable('resize', true);%" \
+    noVNC-1.1.0/vnc_lite.html
+
+# Install tigervnc
+curl -sSfL 'https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.9.0.x86_64.tar.gz' | tar -zxf - --strip=2
+
+
+cp $REPO_DIR/jupyter_desktop/share/xstartup .
+chmod +x xstartup
+
+mkdir Desktop
+
+# Copy the script to the Desktop
+cp -R $REPO_DIR/src Desktop
+popd
+
+pushd $REPO_DIR/jupyter_desktop
+
+# Configure jupyter-server-proxy VNC
+# https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#specifying-config-from-python-packages
+pip install .
+python -c "from pkg_resources import iter_entry_points; print(list(iter_entry_points(group='jupyter_serverproxy_servers')))"
+
+popd
+
+# install neo4j
 
 if [ ! -f neo4j-community-${VERSION}-unix.tar.gz ]; then
   wget -q http://dist.neo4j.org/neo4j-community-${VERSION}-unix.tar.gz
@@ -10,13 +52,25 @@ mv neo4j-community-${VERSION} neo4j-community
 mv neo4j-community ${CONDA_DIR}/
 rm neo4j-community-${VERSION}-unix.tar.gz
 
-echo "dbms.connectors.default_listen_address=0.0.0.0" >> ${CONDA_DIR}/neo4j-community/conf/neo4j.conf
 
 # neo4j has a default password: neo4j
 # However, if you log in with that, the session will soon time out
 # and you will be required to update the original default password 
 ${CONDA_DIR}/neo4j-community/bin/neo4j-admin set-initial-password neo4jbinder
+
 cp -R data ${CONDA_DIR}/neo4j-community/import
+
+# install bloom
+wget -q https://s3.eu-west-2.amazonaws.com/bloom-releases/neo4j-bloom-${BLOOM_VERSION}.zip
+unzip neo4j-bloom-${BLOOM_VERSION}.zip
+mv bloom-plugin-4.x-${BLOOM_VERSION}.jar ${CONDA_DIR}/neo4j-community/plugins/
+
+# configure
 CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf
 echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
 echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
+echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
+echo "dbms.security.procedures.unrestricted=bloom.*" >> $CONF_FILE
+echo "dbms.unmanaged.extension.classes=com.neo4j.bloom.server=/bloom" >> $CONF_FILE
+echo "neo4j.bloom.authorization.role=admin,architect,bloom" >> $CONF_FILE
+echo "dbms.security.http_auth_allowlist=/,/browser.*,/bloom.*" >> $CONF_FILE

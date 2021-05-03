@@ -66,6 +66,7 @@ unzip neo4j-bloom-${BLOOM_VERSION}.zip
 mv bloom-plugin-4.x-${BLOOM_VERSION}.jar ${CONDA_DIR}/neo4j-community/plugins/
 rm *.zip
 rm *.jar
+chmod 755 ${CONDA_DIR}/neo4j-community/plugins/bloom-plugin-4.x-${BLOOM_VERSION}.jar
 
 # configure
 CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf

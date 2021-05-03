@@ -20,7 +20,7 @@ sed -i.bak \
     noVNC-1.1.0/vnc_lite.html
 
 # Install tigervnc
-curl -sSfL 'https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.9.0.x86_64.tar.gz' | tar -zxf - --strip=2
+curl -sSfL 'https://sourceforge.net/projects/tigervnc/files/stable/1.9.0/tigervnc-1.9.0.x86_64.tar.gz' | tar -zxf - --strip=2
 
 
 cp $REPO_DIR/jupyter_desktop/share/xstartup .

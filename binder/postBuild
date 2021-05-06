@@ -1,6 +1,7 @@
 #!/bin/bash
 VERSION=4.2.5
 BLOOM_VERSION=1.6.1
+ORIENT_DB_VERSION=3.1.11
 
 VNC_APPLICATION_DIR=$CONDA_DIR/vnc
 mkdir $VNC_APPLICATION_DIR
@@ -72,7 +73,7 @@ chmod 755 ${CONDA_DIR}/neo4j-community/plugins/bloom-plugin-4.x-${BLOOM_VERSION}
 CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf
 echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
 echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
-#echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
+echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
 echo "dbms.security.procedures.unrestricted=bloom.*" >> $CONF_FILE
 echo "dbms.security.procedures.allowlist=bloom.*" >> $CONF_FILE
 echo "dbms.unmanaged.extension_classes=com.neo4j.bloom.server=/bloom" >> $CONF_FILE

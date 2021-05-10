@@ -1,0 +1,58 @@
+id,skill,category
+1,Analytical Chemistry,Discovery
+2,Antibody screening and selection,Discovery
+3,Assay design,Discovery
+4,Biologicals Discovery,Discovery
+5,Biologicals profiling,Discovery
+6,Delivery systems,Discovery
+7,Disease modelling,Discovery
+8,Drug discovery,Discovery
+9,Gene editing /CRISPR,Discovery
+10,Host target biology,Discovery
+11,Immunology,Discovery
+12,Informatics and data management,Discovery
+13,In-vitro ADME,Discovery
+14,In-vitro Toxicolgy,Discovery
+15,Medicinal Chemistry,Discovery
+16,Pathogen genetics,Discovery 
+17,Pathogen 'Omics ,Discovery
+18,Pathogen target biology,Discovery
+19,SAR studies and lead optimization,Discovery
+20,Small molecule Discovery,Discovery
+21,Small molecule screening and selection,Discovery
+22,Sources of antimicrobial compounds,Discovery
+23,Structural biology,Discovery
+24,Synthetic Chemistry,Discovery
+25,Vaccine Discovery,Discovery
+26,Biologicals preclinical development,Pre-clinical Development
+27,Candidate Selection,Pre-clinical Development
+28,Compound delivery and disposition ,Pre-clinical Development
+29,Formulation Sciences,Pre-clinical Development
+30,In vivo Pharmacology,Pre-clinical Development
+31,In-vivo ADME,Pre-clinical Development
+32,In-vivo Toxicology,Pre-clinical Development
+33,Pharmaceutical Sciences,Pre-clinical Development
+34,Pharmacokinetics and pharmacokinetic/pharmacodynamics,Pre-clinical Development
+35,Pre-clinical data analysis AI/ML,Pre-clinical Development
+36,Pre-clinical data management,Pre-clinical Development
+37,Process Chemistry/Scale Up,Pre-clinical Development
+38,Small molecule preclinical development,Pre-clinical Development
+39,Statistical Methods in Pharmacology,Pre-clinical Development
+40,Systems Pharmacology,Pre-clinical Development
+41,Vaccine pre-clinical development,Pre-clinical Development
+42,Biologicals clinical development,Clinical Development
+43,Clinical  data analysis AI/ML,Clinical Development
+44,Clinical data management,Clinical Development
+45,Clinical Pharmacokinetics,Clinical Development
+46,Clinical Trial design,Clinical Development
+47,Creation of treatment guidelines,Clinical Development
+48,Health Technology Assessment,Clinical Development
+49,Medical writing,Clinical Development
+50,Medicines Management,Clinical Development
+51,Patient safety,Clinical Development
+52,Personalised medicine,Clinical Development
+53,Regulatory Affairs,Clinical Development
+54,Safety Pharmacology,Clinical Development
+55,Small molecules clinical development,Clinical Development
+56,Statistical Methods in Clinical trials,Clinical Development
+57,Vaccine clinical development,Clinical Development

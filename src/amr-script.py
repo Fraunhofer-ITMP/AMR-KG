@@ -2,8 +2,10 @@
 
 import os
 import pandas as pd
+from tqdm import tqdm
 
 from py2neo import Node, Relationship
+from py2neo.database.work import Transaction
 
 from constants import DATA_DIR
 from connection import populate_db
@@ -54,7 +56,8 @@ def map_data(
     return data_df
 
 
-def add_nodes(tx):
+def add_nodes(tx: Transaction):
+    """Add nodes specific to AMR data """
 
     node_dict = {
         'Person': {},
@@ -144,12 +147,15 @@ def add_nodes(tx):
         index_col='id',
     )
 
-    skill_list_1 = set(skill_df['skill'].tolist())
-    skill_list_2 = set(skill_df['category'].unique().tolist())
+    skill_set_1 = set(skill_df['skill'].tolist())
+    skill_set_2 = {
+        i + '_group'
+        for i in skill_df['category'].unique().tolist()
+    }
 
-    skill_list_1.union(skill_list_2)
+    skill_set_1 = skill_set_1.union(skill_set_2)
 
-    for skill_name in skill_list_1:
+    for skill_name in skill_set_1:
         skill_property = {}
 
         if pd.notna(skill_name):
@@ -160,34 +166,137 @@ def add_nodes(tx):
     return node_dict
 
 
+def add_relations(tx: Transaction, df: pd.DataFrame, node_mapping_dict: dict):
+    """Add relations specific to AMR data. """
+
+    for rows in tqdm(df.values, desc='Populating graph'):
+        (
+            person_name,
+            institute_name,
+            project_1_name,
+            project_2_name,
+            pathogen_1_name,
+            pathogen_2_name,
+            pathogen_3_name,
+            skill_1_name,
+            skill_2_name,
+            skill_3_name,
+            skill_4_name
+        ) = rows
+
+        # Person - [WORKS_AT] -> Institute
+        person_node = node_mapping_dict['Person'][person_name]
+        institute_node = node_mapping_dict['Institute'][institute_name]
+        works_at = Relationship(person_node, 'WORKS_AT', institute_node)
+        tx.create(works_at)
+
+        # Peron - [IS_INVOLVED_IN] -> Project + Institute -[SUPERVISES] -> Project
+        if pd.notna(project_1_name):
+            project_1_node = node_mapping_dict['Project'][project_1_name]
+            involved_in = Relationship(person_node, 'IS_INVOLVED_IN', project_1_node)
+            tx.create(involved_in)
+
+            supervises = Relationship(institute_node, 'SUPERVISES', project_1_node)
+            tx.create(supervises)
+
+        if pd.notna(project_2_name) and project_2_name != project_1_name:
+            project_2_node = node_mapping_dict['Project'][project_2_name]
+            involved_in = Relationship(person_node, 'IS_INVOLVED_IN', project_2_node)
+            tx.create(involved_in)
+
+            supervises = Relationship(institute_node, 'SUPERVISES', project_2_node)
+            tx.create(supervises)
+
+        # Peron - [HAS_SKILL] -> Skill
+        if pd.notna(skill_1_name):
+            skill_1_node = node_mapping_dict['Skill'][skill_1_name]
+            has_skill = Relationship(person_node, 'HAS_SKILL', skill_1_node)
+            tx.create(has_skill)
+
+        if pd.notna(skill_2_name) and skill_2_name != skill_1_name:
+            skill_2_node = node_mapping_dict['Skill'][skill_2_name]
+            has_skill = Relationship(person_node, 'HAS_SKILL', skill_2_node)
+            tx.create(has_skill)
+
+        if pd.notna(skill_3_name) and skill_3_name != skill_2_name and skill_3_name != skill_1_name:
+            skill_3_node = node_mapping_dict['Skill'][skill_3_name]
+            has_skill = Relationship(person_node, 'HAS_SKILL', skill_3_node)
+            tx.create(has_skill)
+
+        # Peron - [WORKS_WITH] -> Pathogen
+        if pd.notna(pathogen_1_name):
+            pathogen_1_node = node_mapping_dict['Pathogen'][pathogen_1_name]
+            works_with = Relationship(person_node, 'WORKS_WITH', pathogen_1_node)
+            tx.create(works_with)
+
+        if pd.notna(pathogen_2_name) and pathogen_2_name != pathogen_1_name:
+            pathogen_2_node = node_mapping_dict['Pathogen'][pathogen_2_name]
+            works_with = Relationship(person_node, 'WORKS_WITH', pathogen_2_node)
+            tx.create(works_with)
+
+        if pd.notna(pathogen_3_name) and pathogen_3_name != pathogen_1_name and pathogen_3_name != pathogen_2_name:
+            pathogen_3_node = node_mapping_dict['Pathogen'][pathogen_3_name]
+            works_with = Relationship(person_node, 'WORKS_WITH', pathogen_3_node)
+            tx.create(works_with)
+
+
+def add_skill_data(tx: Transaction, node_mapping_dict: dict):
+    """Add skill category connection to AMR KG. """
+
+    skill_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'AMR', 'skill.csv'),
+        usecols=[
+            'skill',
+            'category'
+        ]
+    )
+
+    skill_df['category'] = skill_df['category'].apply(lambda x: x + '_group')
+
+    for skill_name, skill_class_name in skill_df.values:
+        skill_node = node_mapping_dict['Skill'][skill_name]
+        skill_class_node = node_mapping_dict['Skill'][skill_class_name]
+        includes = Relationship(skill_class_node, 'INCLUDES', skill_node)
+        tx.create(includes)
+
+
 def main():
     tx = populate_db(db_name='amrtest')
 
     df = pd.read_csv(
         os.path.join(DATA_DIR, 'AMR', 'person.csv'),
+        usecols=[
+            'contact',
+            'institute',
+            'project_1',
+            'project_2',
+            'pathogen_1',
+            'pathogen_2',
+            'pathogen_3',
+            'skill_1',
+            'skill_2',
+            'skill_3',
+            'skill_4'
+        ]
     )
 
     df = map_data(data_df=df)
 
+    # Add nodes
     node_map = add_nodes(tx=tx)
 
-    # pd.set_option('display.max_columns', None)
-    # print(df)
+    # Add relations
+    add_relations(
+        tx=tx,
+        df=df,
+        node_mapping_dict=node_map
+    )
 
-    # for name, email in data_df[['Contact', 'email']].values:
-    # person_node = Node('Person', name=name)
-    #     tx.create(person_node)
-    #
-    #     email_node = Node('Data', email="mailto:john@example.com")
-    #     tx.create(email_node)
-    #
-    #     orcid_node = Node('ORCID', orcid='https://orcid.org/0000-0002-7683-0452')  # split node to view only number
-    #     tx.create(orcid_node)
-    #
-    #     person_attr_1 = Relationship(person_node, 'has_email', email_node)
-    #     perosn_attr_2 = Relationship(person_node, 'has_orcid', orcid_node)
-    #     tx.create(person_attr_1)
-    #     tx.create(perosn_attr_2)
+    # Add intra-skill relations
+    add_skill_data(
+        tx=tx,
+        node_mapping_dict=node_map
+    )
 
     tx.commit()
 

@@ -1,5 +1,11 @@
 from neo4j import GraphDatabase
 
+"""
+This is similar to the db-connection.py script.
+This script does not create a new DB, it is used to populate the default
+database at start up time.
+"""
+
 class Neo4jConnection:
 
     def __init__(self, uri, user, pwd):

@@ -61,21 +61,8 @@ ${CONDA_DIR}/neo4j-community/bin/neo4j-admin set-initial-password neo4jbinder
 
 cp -R data ${CONDA_DIR}/neo4j-community/import
 
-# install bloom
-wget -q https://s3.eu-west-2.amazonaws.com/bloom-releases/neo4j-bloom-${BLOOM_VERSION}.zip
-unzip neo4j-bloom-${BLOOM_VERSION}.zip
-mv bloom-plugin-4.x-${BLOOM_VERSION}.jar ${CONDA_DIR}/neo4j-community/plugins/
-rm *.zip
-rm *.jar
-chmod 755 ${CONDA_DIR}/neo4j-community/plugins/bloom-plugin-4.x-${BLOOM_VERSION}.jar
-
 # configure
 CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf
 echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
 echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
-echo "dbms.security.procedures.unrestricted=bloom.*" >> $CONF_FILE
-echo "dbms.security.procedures.allowlist=bloom.*" >> $CONF_FILE
-echo "dbms.unmanaged.extension_classes=com.neo4j.bloom.server=/bloom" >> $CONF_FILE
-echo "neo4j.bloom.authorization_role=admin,architect,reader,bloom" >> $CONF_FILE
-echo "dbms.security.http_auth_allowlist=/,/browser.*,/bloom.*" >> $CONF_FILE

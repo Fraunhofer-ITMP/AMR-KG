@@ -7,3 +7,5 @@ dependencies:
 - neo4j-python-driver
 - pandas
 - jupyter-server-proxy
+- websockify
+- pip

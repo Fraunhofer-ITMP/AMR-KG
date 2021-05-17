@@ -11,6 +11,8 @@ ln -s "$CONDA_DIR/vnc/Desktop"
 export PATH=/srv/conda/notebook/bin:$PATH
 #set +eu
 #source /srv/conda/bin/activate notebook
-python ~/src/populate.py
+python ~/src/amr-script.py
+python ~/src/mic-script.py
+
 #set -eu
 exec "$@"

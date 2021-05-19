@@ -3,15 +3,16 @@
 import logging
 
 from py2neo import Graph, SystemGraph
-from py2neo.database.work import ClientError
+from py2neo.errors import ClientError
+from py2neo.database import Transaction
 
-from constants import ADMIN_NAME, ADMIN_PASS
+from constants import ADMIN_NAME, ADMIN_PASS, URL
 
 logger = logging.getLogger()
 logging.basicConfig(level=logging.INFO)
 
 system_graph = SystemGraph(
-    'bolt://localhost:7687',
+    URL,
     auth=(ADMIN_NAME, ADMIN_PASS)
 )
 
@@ -63,10 +64,18 @@ def populate_db(db_name: str):
     assert in_db is True
 
     conn = Graph(
-        'bolt://localhost:7687',
+        URL,
         auth=(ADMIN_NAME, ADMIN_PASS),
         name=db_name
     )
 
     tx = conn.begin()
     return tx
+
+def commit(db_name: str, tx: Transaction):
+    conn = Graph(
+        URL,
+        auth=(ADMIN_NAME, ADMIN_PASS),
+        name=db_name
+    )
+    conn.commit(tx)

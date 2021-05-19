@@ -5,10 +5,11 @@ import pandas as pd
 from tqdm import tqdm
 
 from py2neo import Node, Relationship
-from py2neo.database.work import Transaction
+from py2neo.database import Transaction
 
 from constants import DATA_DIR
-from connection import populate_db
+from connection import commit, populate_db
+import sys, getopt
 
 
 def create_nodes(tx: Transaction, data: pd.DataFrame):
@@ -141,8 +142,21 @@ def create_relations(
             tx.create(in_year)
 
 
-def main():
-    tx = populate_db(db_name='micdata')
+def main(argv):
+    db_name = "micdata"
+    try:
+        opts, args = getopt.getopt(argv,"hd:",["db="])
+    except getopt.GetoptError:
+        print('mic-script -id <dbname>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('mic-script -id <dbname>')
+            sys.exit()
+        elif opt in ("-d", "--db"):
+            db_name = arg
+
+    tx = populate_db(db_name=db_name)
 
     data_df = pd.read_csv(
         os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
@@ -172,8 +186,8 @@ def main():
         node_map=node_mapping_dict
     )
 
-    tx.commit()
+    commit(db_name, tx)
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

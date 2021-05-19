@@ -9,10 +9,7 @@ ln -s "$CONDA_DIR/vnc/Desktop"
 (${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
 
 export PATH=/srv/conda/notebook/bin:$PATH
-#set +eu
-#source /srv/conda/bin/activate notebook
-python ~/src/amr-script.py
-python ~/src/mic-script.py
+python ~/src/amr-script.py -d neo4j
+python ~/src/mic-script.py -d neo4j
 
-#set -eu
 exec "$@"

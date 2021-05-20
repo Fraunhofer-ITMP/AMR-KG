@@ -1,24 +1,24 @@
-id,pathogen
-1,Acinetobacter baumannii
-2,Burkholderia Cepacia
-3,Campylobacter spp.
-4,Chlamydia
-5,Clostridium Difficile
-6,Enterobacteriaceae
-7,Enterococcus faecium
-8,Escherichia Coli
-9,Haemophilus influenzae
-10,Helicobacter pylori
-11,Klebsiella Pneumoniae
-12,Mycobacterium avium complex
-13,Mycobacterium Tuberculosis
-14,Neisseria Gonorrhoeae
-15,Proteus
-16,Pseudomonas Aeruginosa
-17,Salmonellae
-18,Serratia
-19,Shigella spp.
-20,Staphylococcus Aureus
-21,Streptococcus
-22,Streptococcus pneumoniae
-23,Streptococcus Pyogenes
+id,pathogen,ncbitaxon
+1,Acinetobacter baumannii,470
+2,Burkholderia cepacia,292
+3,Campylobacter sp.,205
+4,Chlamydia,810
+5,Clostridium difficile,1496
+6,Enterobacteriaceae,543
+7,Enterococcus faecium,1352
+8,Escherichia coli,562
+9,Haemophilus influenzae,727
+10,Helicobacter pylori,210
+11,Klebsiella pneumoniae,573
+12,Mycobacterium avium complex,37162
+13,Mycobacterium tuberculosis,1773
+14,Neisseria gonorrhoeae,485
+15,Proteus,583
+16,Pseudomonas aeruginosa,287
+17,Salmonella,590
+18,Serratia,613
+19,Shigella sp.,625
+20,Staphylococcus aureus,1280
+21,Streptococcus,1301
+22,Streptococcus pneumoniae,1313
+23,Streptococcus pyogenes,1314

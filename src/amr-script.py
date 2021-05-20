@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import getopt
 import os
-import pandas as pd
-from tqdm import tqdm
+import sys
 
+import pandas as pd
 from py2neo import Node, Relationship
 from py2neo.database import Transaction
+from tqdm import tqdm
 
-from constants import DATA_DIR
 from connection import commit, populate_db
-import sys, getopt
+from constants import DATA_DIR
+
 
 def map_data(
-    data_df: pd.DataFrame
+        data_df: pd.DataFrame
 ):
     # Map to institute name
     institute_dict = pd.read_csv(
@@ -261,9 +263,9 @@ def add_skill_data(tx: Transaction, node_mapping_dict: dict):
 
 
 def main(argv):
-    db_name = "amrtest"
+    db_name = "amr"
     try:
-        opts, args = getopt.getopt(argv,"hd:",["db="])
+        opts, args = getopt.getopt(argv, "hd:", ["db="])
     except getopt.GetoptError:
         print('amr-script -id <dbname>')
         sys.exit(2)
@@ -273,6 +275,7 @@ def main(argv):
             sys.exit()
         elif opt in ("-d", "--db"):
             db_name = arg
+
     tx = populate_db(db_name=db_name)
     df = pd.read_csv(
         os.path.join(DATA_DIR, 'AMR', 'person.csv'),

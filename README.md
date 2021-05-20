@@ -1,5 +1,5 @@
 # Jupyter Desktop
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/main?urlpath=desktop)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/master?urlpath=desktop)
 # Neo4J-graph
 Repository for Neo4J graph database
 
@@ -7,7 +7,7 @@ Repository for Neo4J graph database
 1. connection.py - Python script using Neo4J for connecting to local DB and storing data in it.
 
 
-To run the database, you can either build locally with [repo2docker](https://repo2docker.readthedocs.io/) or [run on mybinder.org](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/main?urlpath=desktop)
+To run the database, you can either build locally with [repo2docker](https://repo2docker.readthedocs.io/) or [run on mybinder.org](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/master?urlpath=desktop)
 
 To build locally:
 

@@ -1,35 +1,20 @@
-# Jupyter Desktop
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/main?urlpath=desktop)
-# Neo4J-graph
-Repository for Neo4J graph database
+# AMR Knowledge Graph  
 
-1. data - data folder containing all the data files for the neo4j database
-1. connection.py - Python script using Neo4J for connecting to local DB and storing data in it.
+----------
 
+To visualize the knowledge graph, please click on the icon below :
 
-To run the database, you can either build locally with [repo2docker](https://repo2docker.readthedocs.io/) or [run on mybinder.org](https://mybinder.org/v2/gh/ITeMP-temp/Neo4J-graph/main?urlpath=desktop)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
-To build locally:
+----------
 
- * Install [Docker](https://www.docker.com/) if required
- * Create a virtual environment and install repo2docker from PyPI.
- * Clone this repository
- * Run ``repo2docker``. 
- * Depending on the permissions, you might have to run the command as an admin
+## Add new members?
 
+Fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to get access to the database.
 
-```
-pip install jupyter-repo2docker
-git clone https://github.com/ITeMP-temp/Neo4J-graph.git
-cd Neo4J-graph
-repo2docker .
-```
+__________
 
-Run XFCE (or other desktop environments) on Jupyter.
-When this extension is launched it will run a Linux desktop on the Jupyter single-user server, and proxy it to your browser using VNC via Jupyter.
-Neo4j community is also installed and can be accessed via the web UI after launching the Desktop.
-To open it,
- 
-* Launch the Desktop
-* Open Firefox
-* Enter localhost:7474
+# Partners
+<p align="center">
+    <img src="https://www.imi.europa.eu/sites/default/files/styles/facebook/public/projects/logos/IMI%20AMR%20Accelerator_logo.jpg?itok=ghj1Z1T0" width="200">
+</p>

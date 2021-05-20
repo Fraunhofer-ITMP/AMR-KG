@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
+import getopt
 import os
-import pandas as pd
-from tqdm import tqdm
+import sys
 
+import pandas as pd
 from py2neo import Node, Relationship
 from py2neo.database import Transaction
+from tqdm import tqdm
 
-from constants import DATA_DIR
 from connection import commit, populate_db
-import sys, getopt
+from constants import DATA_DIR
 
 
 def create_nodes(tx: Transaction, data: pd.DataFrame):
@@ -144,6 +145,7 @@ def create_relations(
 
 def main(argv):
     db_name = "micdata"
+
     try:
         opts, args = getopt.getopt(argv,"hd:",["db="])
     except getopt.GetoptError:

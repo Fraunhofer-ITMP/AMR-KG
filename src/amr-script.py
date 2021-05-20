@@ -135,12 +135,13 @@ def add_nodes(tx: Transaction):
         index_col='id',
     )
 
-    for pathogen_name in pathogen_df.values:
+    for pathogen_name, taxon_id in pathogen_df.values:
         pathogen_property = {}
 
         if pd.notna(pathogen_name):
             pathogen_name = pathogen_name[0]
             pathogen_property['name'] = pathogen_name
+            pathogen_property['info'] = f'https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={taxon_id}'
             node_dict['Pathogen'][pathogen_name] = Node('Pathogen', **pathogen_property)
             tx.create(node_dict['Pathogen'][pathogen_name])
 

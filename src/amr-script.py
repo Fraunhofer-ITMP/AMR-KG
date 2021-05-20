@@ -121,6 +121,7 @@ def add_nodes(tx: Transaction):
         project_property = {}
 
         if pd.notna(project_name):
+            project_name = project_name[0]
             project_property['name'] = project_name
             project_property['link'] = f'https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}'
 

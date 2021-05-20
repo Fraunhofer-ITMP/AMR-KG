@@ -104,7 +104,6 @@ def add_nodes(tx: Transaction):
         institute_property = {}
 
         if pd.notna(institute_name):
-            institute_name = institute_name[0]
             institute_property['name'] = institute_name
             institute_property['link'] = institute_page
 
@@ -122,7 +121,6 @@ def add_nodes(tx: Transaction):
         project_property = {}
 
         if pd.notna(project_name):
-            project_name = project_name[0]
             project_property['name'] = project_name
             project_property['link'] = f'https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}'
 

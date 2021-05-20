@@ -64,7 +64,7 @@ echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
 echo "dbms.default_database=amr" >> $CONF_FILE
 
-# populate the neo4j DB
+# populate the default DB in neo4j
 
 (${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
 

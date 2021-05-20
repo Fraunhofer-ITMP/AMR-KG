@@ -4,12 +4,7 @@ set -eux
 
 ln -s "$CONDA_DIR/vnc/Desktop"
 
-# populate the neo4j DB
 # start neo4j
-(${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
-
-export PATH=/srv/conda/notebook/bin:$PATH
-python ~/src/amr-script.py -d neo4j
-python ~/src/mic-script.py -d neo4j
+${CONDA_DIR}/neo4j-community/bin/neo4j start
 
 exec "$@"

@@ -100,12 +100,13 @@ def add_nodes(tx: Transaction):
         index_col='id',
     )
 
-    for institute_name in institute_df.values:
+    for institute_name, institute_page in institute_df.values:
         institute_property = {}
 
         if pd.notna(institute_name):
             institute_name = institute_name[0]
             institute_property['name'] = institute_name
+            institute_property['link'] = institute_page
 
             node_dict['Institute'][institute_name] = Node('Institute', **institute_property)
             tx.create(node_dict['Institute'][institute_name])
@@ -123,6 +124,8 @@ def add_nodes(tx: Transaction):
         if pd.notna(project_name):
             project_name = project_name[0]
             project_property['name'] = project_name
+            project_property['link'] = f'https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}'
+
             node_dict['Project'][project_name] = Node('Project', **project_property)
             tx.create(node_dict['Project'][project_name])
 

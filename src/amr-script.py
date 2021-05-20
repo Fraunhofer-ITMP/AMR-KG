@@ -139,7 +139,6 @@ def add_nodes(tx: Transaction):
         pathogen_property = {}
 
         if pd.notna(pathogen_name):
-            pathogen_name = pathogen_name[0]
             pathogen_property['name'] = pathogen_name
             pathogen_property['info'] = f'https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={taxon_id}'
             node_dict['Pathogen'][pathogen_name] = Node('Pathogen', **pathogen_property)

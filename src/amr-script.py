@@ -9,7 +9,7 @@ from py2neo import Node, Relationship
 from py2neo.database import Transaction
 from tqdm import tqdm
 
-from connection import commit, populate_db
+from connection import populate_db
 from constants import DATA_DIR
 
 
@@ -313,7 +313,7 @@ def main(argv):
         tx=tx,
         node_mapping_dict=node_map
     )
-    commit(db_name, tx)
+    tx.commit()
 
 
 if __name__ == '__main__':

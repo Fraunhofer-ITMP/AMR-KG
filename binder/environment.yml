@@ -10,4 +10,4 @@ dependencies:
 - websockify
 - pip
 - pip:
-   - py2neo
+   - py2neo==2021.0.1

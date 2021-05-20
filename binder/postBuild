@@ -62,12 +62,13 @@ CONF_FILE=${CONDA_DIR}/neo4j-community/conf/neo4j.conf
 echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
 echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
+echo "dbms.default_database=amr" >> $CONF_FILE
 
 # populate the neo4j DB
 
 (${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
 
 export PATH=/srv/conda/notebook/bin:$PATH
-python $HOME/src/amr-script.py -d neo4j
+python $HOME/src/amr-script.py
 
 ${CONDA_DIR}/neo4j-community/bin/neo4j stop

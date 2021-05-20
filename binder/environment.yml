@@ -4,8 +4,10 @@ channels:
 - defaults
 dependencies:
 - openjdk=11
-- neo4j-python-driver
 - pandas
+- tqdm
 - jupyter-server-proxy
 - websockify
 - pip
+- pip:
+   - py2neo

@@ -66,9 +66,9 @@ echo "dbms.default_database=amr" >> $CONF_FILE
 
 # populate the default DB in neo4j
 
-(${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
+(${CONDA_DIR}/neo4j-community/bin/amr start && sleep 20) | grep "Started neo4j"
 
 export PATH=/srv/conda/notebook/bin:$PATH
 python $HOME/src/amr-script.py
 
-${CONDA_DIR}/neo4j-community/bin/neo4j stop
+${CONDA_DIR}/neo4j-community/bin/amr stop

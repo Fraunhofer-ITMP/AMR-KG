@@ -403,7 +403,7 @@ def add_institute_data(
         os.path.join(DATA_DIR, "AMR", "institute.csv"), usecols=['institute', 'projects']
     )
 
-    for row in tqdm(institute_df.values, desc='Populating institute projects'):
+    for row in institute_df.values:
         (
             institute_name,
             projects
@@ -412,11 +412,12 @@ def add_institute_data(
         institute_node = node_mapping_dict["Institute"][institute_name]
 
         for project_idx in projects.split(","):
-            project_name = project_dict.get(project_idx)
-            project_node = node_mapping_dict.get(project_name)
+            if project_idx:
+                project_name = project_dict[int(project_idx)]
+                project_node = node_mapping_dict['Project'][project_name]
 
-            supervises = Relationship(institute_node, "SUPERVISES", project_node)
-            tx.create(supervises)
+                supervises = Relationship(institute_node, "SUPERVISES", project_node)
+                tx.create(supervises)
 
 
 def main(argv):
@@ -449,7 +450,6 @@ def main(argv):
             "skill_3",
             "skill_4",
         ],
-        dtype=str,
     )
 
     df = map_data(data_df=df)

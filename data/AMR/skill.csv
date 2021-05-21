@@ -1,58 +1,111 @@
-id,skill,category,definition
-1,Analytical Chemistry,Discovery,
-2,Antibody screening and selection,Discovery,
-3,Assay design,Discovery,
-4,Biological Discovery,Discovery,
-5,Biological profiling,Discovery,
-6,Delivery systems,Discovery,
-7,Disease modelling,Discovery,
-8,Drug discovery,Discovery,
-9,Gene editing /CRISPR,Discovery,
-10,Host target biology,Discovery,
-11,Immunology,Discovery,
-12,Informatics and data management,Discovery,
-13,In-vitro ADME,Discovery,
-14,In-vitro Toxicolgy,Discovery,
-15,Medicinal Chemistry,Discovery,https://revive.gardp.org/resource/medicinal-chemistry/
-16,Pathogen genetics,Discovery,
-17,Pathogen 'Omics ,Discovery,
-18,Pathogen target biology,Discovery,
-19,SAR studies and lead optimization,Discovery,https://revive.gardp.org/resource/lead-optimization/
-20,Small molecule Discovery,Discovery,
-21,Small molecule screening and selection,Discovery,
-22,Sources of antimicrobial compounds,Discovery,
-23,Structural biology,Discovery,
-24,Synthetic Chemistry,Discovery,
-25,Vaccine Discovery,Discovery,
-26,Biological preclinical development,Pre-clinical Development,https://revive.gardp.org/resource/preclinical-development/
-27,Candidate Selection,Pre-clinical Development,
-28,Compound delivery and disposition ,Pre-clinical Development,
-29,Formulation Sciences,Pre-clinical Development,
-30,In vivo Pharmacology,Pre-clinical Development,
-31,In-vivo ADME,Pre-clinical Development,https://revive.gardp.org/resource/absorption-distribution-metabolism-elimination-adme/
-32,In-vivo Toxicology,Pre-clinical Development,
-33,Pharmaceutical Sciences,Pre-clinical Development,
-34,Pharmacokinetics and pharmacodynamics,Pre-clinical Development,https://revive.gardp.org/resource/pharmacokinetics-pharmacodynamics-pk-pd/
-35,Pre-clinical data analysis AI/ML,Pre-clinical Development,
-36,Pre-clinical data management,Pre-clinical Development,
-37,Process Chemistry/Scale Up,Pre-clinical Development,
-38,Small molecule preclinical development,Pre-clinical Development,
-39,Statistical Methods in Pharmacology,Pre-clinical Development,
-40,Systems Pharmacology,Pre-clinical Development,
-41,Vaccine pre-clinical development,Pre-clinical Development,
-42,Biologicals clinical development,Clinical Development,
-43,Clinical  data analysis AI/ML,Clinical Development,
-44,Clinical data management,Clinical Development,
-45,Clinical Pharmacokinetics,Clinical Development,
-46,Clinical Trial design,Clinical Development,https://revive.gardp.org/resource/phase-1234-trials/
-47,Creation of treatment guidelines,Clinical Development,
-48,Health Technology Assessment,Clinical Development,
-49,Medical writing,Clinical Development,
-50,Medicines Management,Clinical Development,
-51,Patient safety,Clinical Development,
-52,Personalised medicine,Clinical Development,
-53,Regulatory Affairs,Clinical Development,
-54,Safety Pharmacology,Clinical Development,
-55,Small molecules clinical development,Clinical Development,
-56,Statistical Methods in Clinical trials,Clinical Development,
-57,Vaccine clinical development,Clinical Development,
+id,category,skill,definition
+1,Clinical,Abbreviated new drug application (ANDA),https://revive.gardp.org/resource/abbreviated-new-drug-application-anda/
+2	,Pre-clinical,"Absorption, distribution, metabolism, elimination (ADME)",https://revive.gardp.org/resource/absorption-distribution-metabolism-elimination-adme/
+3,Clinical,Active pharmaceutical ingredient (API),https://revive.gardp.org/resource/active-pharmaceutical-ingredient-api/
+4,Clinical,Adaptive trial,https://revive.gardp.org/resource/adaptive-trial/
+5	,Pre-clinical,Ames test,https://revive.gardp.org/resource/ames-test/
+6,Discovery,"Antimicrobial susceptibility testing (AST), resistance testing",https://revive.gardp.org/resource/antimicrobial-susceptibility-testing-ast-resistance-testing/
+7,Discovery,Bacterial efflux,https://revive.gardp.org/resource/bacterial-efflux/
+8,Discovery,Bacterial target,https://revive.gardp.org/resource/bacterial-target/
+9,Clinical,Best available therapy (BAT),https://revive.gardp.org/resource/best-available-therapy-bat/
+10,Clinical,Beta (ÃŸ)-lactamase,https://revive.gardp.org/resource/beta-lactamase/
+11,Clinical,Beta (ÃŸ)-lactamase inhibitor (BLI),https://revive.gardp.org/resource/beta-s-lactamase-inhibitor-bli/
+12,Clinical,Biologics license application (BLA),https://revive.gardp.org/resource/biologics-license-application-bla/
+13,Clinical,Bloodstream infection (BSI),https://revive.gardp.org/resource/bloodstream-infection-bsi/
+14,Discovery,"Breakpoint concentration, clinical",https://revive.gardp.org/resource/breakpoint-concentration-clinical/
+15,Clinical,Candidate,https://revive.gardp.org/resource/candidate/
+16,Clinical,"Chemistry, manufacturing and controls (CMC)",https://revive.gardp.org/resource/chemistry-manufacturing-and-controls-cmc/
+17,Clinical,"Clearance, renal",https://revive.gardp.org/resource/clearance-renal/
+18,Clinical,Clinical Development,https://revive.gardp.org/resource/clinical-development/
+19,Clinical,Clinical exposure-response (CER) relationship,https://revive.gardp.org/resource/clinical-exposure-response-cer-relationship/
+20,Clinical,Clinical study report (CSR),https://revive.gardp.org/resource/clinical-study-report-csr/
+21,Clinical,Cmax,https://revive.gardp.org/resource/cmax/
+22,Clinical,"Compassionate use, clinical",https://revive.gardp.org/resource/compassionate-use-clinical/
+23,Clinical,Database lock (DBL),https://revive.gardp.org/resource/database-lock-dbl/
+24,Clinical,De-escalation,https://revive.gardp.org/resource/de-escalation/
+25,Clinical,"Dosing: BID, TID",https://revive.gardp.org/resource/dosing-bid-tid/
+26,Clinical,Double-blind,https://revive.gardp.org/resource/double-blind/
+27,Clinical,"Drug product, medicinal product",https://revive.gardp.org/resource/drug-product-medicinal-product/
+28,Discovery,Efflux-mediated resistance,https://revive.gardp.org/resource/efflux-mediated-resistance/
+29,Clinical,Eligibility criteria (inclusion/exclusion),https://revive.gardp.org/resource/eligibility-criteria-inclusion-exclusion/
+30,Clinical,"Endpoint, clinical trial",https://revive.gardp.org/resource/endpoint-clinical-trial/
+31,Clinical,Epidemiological cut-off value (ECOFF),https://revive.gardp.org/resource/epidemiologcial-cut-off-value-ecoff/
+32,Clinical,Extensively drug-resistant (XDR),https://revive.gardp.org/resource/extensively-drug-resistant-xdr/
+33,Clinical,First-in-human (FIH),https://revive.gardp.org/resource/first-in-human/
+34,Clinical,Good clinical practice (GCP),https://revive.gardp.org/resource/good-clinical-practice/
+35	,Pre-clinical,Good Laboratory Practice (GLP),https://revive.gardp.org/resource/good-laboratory-practice-glp/
+36,Clinical,Good Manufacturing Practice (GMP),https://revive.gardp.org/resource/good-manufacturing-practice-gmp/
+37,Discovery,Gram-positive/negative,https://revive.gardp.org/resource/gram-positive-negative/
+38,Discovery,High-throughput screen (HTS),https://revive.gardp.org/resource/high-throughput-screen-hts/
+39,Discovery,Hit,https://revive.gardp.org/resource/hit/
+40,Discovery,"Hit confirmation, hit validation",https://revive.gardp.org/resource/hit-confirmation-hit-validation/
+41,Discovery,Hit expansion,https://revive.gardp.org/resource/hit-expansion/
+42,Discovery,"Hit identification, hit discovery",https://revive.gardp.org/resource/hit-identification-hit-discovery/
+43,Discovery,"Hit-to-lead (HTL), lead generation",https://revive.gardp.org/resource/hit-to-lead-htl-lead-generation/
+44,Clinical,Informed consent,https://revive.gardp.org/resource/informed-consent/
+45,Clinical,Institutional Review Board (IRB),https://revive.gardp.org/resource/institutional-review-board-irb/
+46,Clinical,Intra-abdominal infection (IAI),https://revive.gardp.org/resource/intra-abdominal-infection-iai/
+47,Discovery,Intracellular concentration,https://revive.gardp.org/resource/intracellular-concentration/
+48,Clinical,Investigational medicinal product (IMP),https://revive.gardp.org/resource/investigational-medicinal-product-imp/
+49,Clinical,Investigational new drug (IND),https://revive.gardp.org/resource/investigational-new-drug-ind/
+50,Clinical,"Investigatorâ€™s brochure (IB), clinical",https://revive.gardp.org/resource/investigators-brochure-ib-clinical/
+51,Discovery,Lead compound,https://revive.gardp.org/resource/lead-compound/
+52,Discovery,Lead optimization,https://revive.gardp.org/resource/lead-optimization/
+53,Clinical,Limited population pathway for antimicrobial and antifungal drugs (LPAD),https://revive.gardp.org/resource/limited-population-pathway-for-antimicrobial-and-antifungal-drugs-lpad/
+54,Discovery,Lipophilicity,https://revive.gardp.org/resource/lipophilicity/
+55,Discovery,LogD,https://revive.gardp.org/resource/logd/
+56,Discovery,LogP,https://revive.gardp.org/resource/logp/
+57,Clinical,Marketing authorization application (MAA),https://revive.gardp.org/resource/marketing-authorization-application-maa/
+58	,Pre-clinical,Maximum tolerated dose (MTD),https://revive.gardp.org/resource/maximum-tolerated-dose-mtd/
+59,Discovery,Mechanism of action (MoA),https://revive.gardp.org/resource/mechanism-of-action-moa/
+60	,Pre-clinical,Median effective dose (ED50),https://revive.gardp.org/resource/median-effective-dose-ed50/
+61	,Pre-clinical,Median lethal dose (LD50),https://revive.gardp.org/resource/median-lethal-dose-ld50/
+62,Discovery,Medicinal chemistry,https://revive.gardp.org/resource/medicinal-chemistry/
+63,Discovery,Minimum inhibitory concentration (MIC),https://revive.gardp.org/resource/minimal-inhibitory-concentration-mic/
+64,Discovery,Multidrug-resistant (MDR),https://revive.gardp.org/resource/multidrug-resistant-mdr/
+65,Discovery,Natural products,https://revive.gardp.org/resource/natural-products/
+66,Clinical,"New chemical entity (NCE), new molecular entity (NME)",https://revive.gardp.org/resource/new-chemical-entity-nce-new-molecular-entity-nme/
+67,Clinical,New drug application (NDA),https://revive.gardp.org/resource/new-drug-application-nda/
+68	,Pre-clinical,No observed adverse effect level (NOAEL),https://revive.gardp.org/resource/no-observed-adverse-effect-level-noael/
+69	,Pre-clinical,No observed effect level (NOEL),https://revive.gardp.org/resource/no-observed-effect-level-noel/
+70,Clinical,Non-inferiority margin,https://revive.gardp.org/resource/non-inferiority-margin/
+71,Clinical,Non-inferiority trial,https://revive.gardp.org/resource/non-inferiority-trial/
+72,Clinical,Number needed to treat (NNT),https://revive.gardp.org/resource/number-needed-to-treat-nnt/
+73,Clinical,Observational study,https://revive.gardp.org/resource/observational-study/
+74,Clinical,Orphan drug,https://revive.gardp.org/resource/orphan-drug/
+75,Clinical,"Outcome, clinical trial",https://revive.gardp.org/resource/outcome-clinical-trial/
+76,Clinical,Pandrug-resistant (PDR),https://revive.gardp.org/resource/pandrug-resistant/
+77	,Pre-clinical,Pharmacodynamics (PD),https://revive.gardp.org/resource/pharmacodynamics-pd/
+78	,Pre-clinical,Pharmacokinetics (PK),https://revive.gardp.org/resource/pharmacokinetics-pk/
+79	,Pre-clinical,Pharmacokinetics-pharmacodynamics (PK/PD),https://revive.gardp.org/resource/pharmacokinetics-pharmacodynamics-pk-pd/
+80,Clinical,Pharmacovigilance,https://revive.gardp.org/resource/pharmacovigilance/
+81,Clinical,"Phase 1, 2, 3, 4 trials",https://revive.gardp.org/resource/phase-1234-trials/
+82,Clinical,Placebo-controlled trial,https://revive.gardp.org/resource/placebo-controlled-trial/
+83	,Pre-clinical,Plasma concentration,https://revive.gardp.org/resource/plasma-concentration/
+84,Discovery,Plasma protein binding,https://revive.gardp.org/resource/plasma-protein-binding/
+85,Clinical,Pneumonia,https://revive.gardp.org/resource/pneumonia/
+86,Clinical,Power (clinical trials),https://revive.gardp.org/resource/power-clinical-trials/
+87	,Pre-clinical,Preclinical development,https://revive.gardp.org/resource/preclinical-development/
+88,Discovery,Pro-drug,https://revive.gardp.org/resource/pro-drug/
+89	,Pre-clinical,Prolongation of QT interval,https://revive.gardp.org/resource/prolongation-of-qt-interval/
+90,Clinical,QT study,https://revive.gardp.org/resource/qt-study/
+91,Clinical,Qualified infectious disease product (QIDP),https://revive.gardp.org/resource/qualified-infectious-disease-product-qidp/
+92,Clinical,Quality assurance (clinical trials),https://revive.gardp.org/resource/quality-assurance-clinical-trials/
+93,Clinical,Randomized clinical trial (RCT),https://revive.gardp.org/resource/randomized-clinical-trial-rct/
+94,Clinical,Sepsis,https://revive.gardp.org/resource/sepsis/
+95,Clinical,Septic shock,https://revive.gardp.org/resource/septic-shock/
+96,Clinical,Serious adverse event (SAE),https://revive.gardp.org/resource/serious-adverse-event-sae/
+97,Clinical,Skin and soft tissue infection (SSTI),https://revive.gardp.org/resource/skin-and-soft-tissue-infection-ssti/
+98,Discovery,Small molecule,https://revive.gardp.org/resource/small-molecule/
+99,Clinical,Standard of care (SOC),https://revive.gardp.org/resource/standard-of-care-soc/
+100,Clinical,Superiority trial,https://revive.gardp.org/resource/superiority-trial/
+101,Clinical,Suspected unexpected serious adverse reaction (SUSAR),https://revive.gardp.org/resource/suspected-unexpected-serious-adverse-reaction-susar/
+102,Pre-clinical,Target candidate profile (TCP),https://revive.gardp.org/resource/target-candidate-profile-tcp/
+103,Pre-clinical,Target product profile (TPP),https://revive.gardp.org/resource/target-product-profile-tpp/
+104,Discovery,Target validation,https://revive.gardp.org/resource/target-validation/
+105,Clinical,Therapeutic index,https://revive.gardp.org/resource/therapeutic-index/
+106,Clinical,Therapeutic window,https://revive.gardp.org/resource/therapeutic-window/
+107,Clinical,Tissue concentration,https://revive.gardp.org/resource/tissue-concentration/
+108	,Pre-clinical,Toxicity,https://revive.gardp.org/resource/toxicity/
+109,Clinical,Urinary tract infection (UTI),https://revive.gardp.org/resource/urinary-tract-infection-uti/
+110,Clinical,Ventilator-associated pneumonia (VAP),https://revive.gardp.org/resource/ventilator-associated-pneumonia-vap/

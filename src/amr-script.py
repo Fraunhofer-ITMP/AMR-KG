@@ -2,6 +2,7 @@
 
 import getopt
 import os
+import random
 import sys
 
 import pandas as pd
@@ -195,6 +196,9 @@ def add_nodes(tx: Transaction):
 
         if pd.notna(name):
             chemical_property['name'] = name
+
+        # Add GRIT42 data here
+        chemical_property["GRIT42"] = f"GRIT42:{random.randint(1000, 9999)}"
 
         node_dict['Chemical'][name] = Node('Chemical', **chemical_property)
         tx.create(node_dict['Chemical'][name])

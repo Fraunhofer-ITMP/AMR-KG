@@ -36,7 +36,7 @@ def add_data_to_table(
     for idx, val in skill_set.items():
         df[f"{new_col_name}_{idx}"] = val
 
-    df.to_csv(output_file_path)
+    df.to_csv(output_file_path, index=False)
 
 
 def get_anonymized_names(output_file_path: str):
@@ -71,12 +71,11 @@ def add_person_email(output_file_path: str, sep=","):
 
     # Add email
     email = []
-    for name in df.values:
-        name = name[0]
+    for name in df['contact'].values:
         email.append(f"{name.split()[0]}.{name.split()[1]}@test.de")
     df["email"] = email
 
-    df.to_csv(output_file_path)
+    df.to_csv(output_file_path, index=False)
 
 
 def add_institute(output_file_path: str, sep=","):
@@ -94,14 +93,14 @@ def add_institute(output_file_path: str, sep=","):
 
     df["institute"] = institute
 
-    df.to_csv(output_file_path)
+    df.to_csv(output_file_path, index=False)
 
 
 def add_orcid(output_file_path: str, sep=","):
     df = pd.read_csv(
         output_file_path,
         sep=sep,
-        index_col="ID",
+        index_col="id",
         dtype=str,
     )
 
@@ -140,7 +139,7 @@ def add_skill(output_file_path: str, sep=","):
     add_data_to_table(
         file_path=output_file_path,
         file_sep=sep,
-        data_count=57,
+        data_count=110,
         max_data_count=4,
         new_col_name="skill",
         output_file_path=output_file_path,
@@ -178,4 +177,6 @@ def main(
 
 
 if __name__ == "__main__":
-    main(output_file_path="../data/AMR/person.csv")
+    main(
+        output_file_path="../data/AMR/person.csv",
+    )

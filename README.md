@@ -1,4 +1,4 @@
-# AMR Knowledge Graph  
+# <p align="center"> **AMR Knowledge Graph** </p>
 
 To visualize the knowledge graph, please click on the icon : 
 

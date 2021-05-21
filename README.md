@@ -16,5 +16,5 @@ __________
 
 # Partners
 <p align="center">
-    <img src="https://www.imi.europa.eu/sites/default/files/styles/facebook/public/projects/logos/IMI%20AMR%20Accelerator_logo.jpg?itok=ghj1Z1T0" width="200">
+    <img src="https://www.imi.europa.eu/sites/default/files/styles/facebook/public/projects/logos/IMI%20AMR%20Accelerator_logo.jpg?itok=ghj1Z1T0" width="400">
 </p>

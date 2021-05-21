@@ -98,7 +98,7 @@ def add_nodes(tx: Transaction):
     # Create institute nodes
     institute_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "institute.csv"),
-        index_col="id",
+        usecols=['institute', 'link']
     )
 
     for institute_name, institute_page in institute_df.values:
@@ -284,8 +284,6 @@ def add_relations(
             involved_in = Relationship(person_node, "IS_INVOLVED_IN", project_2_node)
             tx.create(involved_in)
 
-            supervises = Relationship(institute_node, "SUPERVISES", project_2_node)
-            tx.create(supervises)
 
         # Peron - [HAS_SKILL] -> Skill
         if pd.notna(skill_1_name):
@@ -391,6 +389,37 @@ def add_skill_data(
         tx.create(includes)
 
 
+def add_institute_data(
+    tx: Transaction,
+    node_mapping_dict: dict
+):
+    # Map to project name
+    project_dict = pd.read_csv(
+        os.path.join(DATA_DIR, "AMR", "project.csv"),
+        dtype=str,
+        index_col="id",
+    ).to_dict()["project"]
+
+    institute_df = pd.read_csv(
+        os.path.join(DATA_DIR, "AMR", "institute.csv"), usecols=['institute', 'projects']
+    )
+
+    for row in tqdm(institute_df.values, desc='Populating institute projects'):
+        (
+            institute_name,
+            projects
+        ) = row
+
+        institute_node = node_mapping_dict["Institute"][institute_name]
+
+        for project_idx in projects.split(","):
+            project_name = project_dict.get(project_idx)
+            project_node = node_mapping_dict.get(project_name)
+
+            supervises = Relationship(institute_node, "SUPERVISES", project_node)
+            tx.create(supervises)
+
+
 def main(argv):
     db_name = "amr"
     try:
@@ -421,6 +450,7 @@ def main(argv):
             "skill_3",
             "skill_4",
         ],
+        dtype=str,
     )
 
     df = map_data(data_df=df)
@@ -454,6 +484,9 @@ def main(argv):
 
     # Add intra-skill relations
     add_skill_data(tx=tx, node_mapping_dict=node_map)
+
+    # Add institute-project edges
+    add_institute_data(tx=tx, node_mapping_dict=node_map)
     tx.commit()
 
 

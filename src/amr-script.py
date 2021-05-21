@@ -284,7 +284,6 @@ def add_relations(
             involved_in = Relationship(person_node, "IS_INVOLVED_IN", project_2_node)
             tx.create(involved_in)
 
-
         # Peron - [HAS_SKILL] -> Skill
         if pd.notna(skill_1_name):
             skill_1_node = node_mapping_dict["Skill"][skill_1_name]

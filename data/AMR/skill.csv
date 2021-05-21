@@ -1,9 +1,9 @@
 id,category,skill,definition
 1,Clinical,Abbreviated new drug application (ANDA),https://revive.gardp.org/resource/abbreviated-new-drug-application-anda/
-2	,Pre-clinical,"Absorption, distribution, metabolism, elimination (ADME)",https://revive.gardp.org/resource/absorption-distribution-metabolism-elimination-adme/
+2,Pre-clinical,"Absorption, distribution, metabolism, elimination (ADME)",https://revive.gardp.org/resource/absorption-distribution-metabolism-elimination-adme/
 3,Clinical,Active pharmaceutical ingredient (API),https://revive.gardp.org/resource/active-pharmaceutical-ingredient-api/
 4,Clinical,Adaptive trial,https://revive.gardp.org/resource/adaptive-trial/
-5	,Pre-clinical,Ames test,https://revive.gardp.org/resource/ames-test/
+5,Pre-clinical,Ames test,https://revive.gardp.org/resource/ames-test/
 6,Discovery,"Antimicrobial susceptibility testing (AST), resistance testing",https://revive.gardp.org/resource/antimicrobial-susceptibility-testing-ast-resistance-testing/
 7,Discovery,Bacterial efflux,https://revive.gardp.org/resource/bacterial-efflux/
 8,Discovery,Bacterial target,https://revive.gardp.org/resource/bacterial-target/
@@ -33,7 +33,7 @@ id,category,skill,definition
 32,Clinical,Extensively drug-resistant (XDR),https://revive.gardp.org/resource/extensively-drug-resistant-xdr/
 33,Clinical,First-in-human (FIH),https://revive.gardp.org/resource/first-in-human/
 34,Clinical,Good clinical practice (GCP),https://revive.gardp.org/resource/good-clinical-practice/
-35	,Pre-clinical,Good Laboratory Practice (GLP),https://revive.gardp.org/resource/good-laboratory-practice-glp/
+35,Pre-clinical,Good Laboratory Practice (GLP),https://revive.gardp.org/resource/good-laboratory-practice-glp/
 36,Clinical,Good Manufacturing Practice (GMP),https://revive.gardp.org/resource/good-manufacturing-practice-gmp/
 37,Discovery,Gram-positive/negative,https://revive.gardp.org/resource/gram-positive-negative/
 38,Discovery,High-throughput screen (HTS),https://revive.gardp.org/resource/high-throughput-screen-hts/
@@ -56,18 +56,18 @@ id,category,skill,definition
 55,Discovery,LogD,https://revive.gardp.org/resource/logd/
 56,Discovery,LogP,https://revive.gardp.org/resource/logp/
 57,Clinical,Marketing authorization application (MAA),https://revive.gardp.org/resource/marketing-authorization-application-maa/
-58	,Pre-clinical,Maximum tolerated dose (MTD),https://revive.gardp.org/resource/maximum-tolerated-dose-mtd/
+58,Pre-clinical,Maximum tolerated dose (MTD),https://revive.gardp.org/resource/maximum-tolerated-dose-mtd/
 59,Discovery,Mechanism of action (MoA),https://revive.gardp.org/resource/mechanism-of-action-moa/
-60	,Pre-clinical,Median effective dose (ED50),https://revive.gardp.org/resource/median-effective-dose-ed50/
-61	,Pre-clinical,Median lethal dose (LD50),https://revive.gardp.org/resource/median-lethal-dose-ld50/
+60,Pre-clinical,Median effective dose (ED50),https://revive.gardp.org/resource/median-effective-dose-ed50/
+61,Pre-clinical,Median lethal dose (LD50),https://revive.gardp.org/resource/median-lethal-dose-ld50/
 62,Discovery,Medicinal chemistry,https://revive.gardp.org/resource/medicinal-chemistry/
 63,Discovery,Minimum inhibitory concentration (MIC),https://revive.gardp.org/resource/minimal-inhibitory-concentration-mic/
 64,Discovery,Multidrug-resistant (MDR),https://revive.gardp.org/resource/multidrug-resistant-mdr/
 65,Discovery,Natural products,https://revive.gardp.org/resource/natural-products/
 66,Clinical,"New chemical entity (NCE), new molecular entity (NME)",https://revive.gardp.org/resource/new-chemical-entity-nce-new-molecular-entity-nme/
 67,Clinical,New drug application (NDA),https://revive.gardp.org/resource/new-drug-application-nda/
-68	,Pre-clinical,No observed adverse effect level (NOAEL),https://revive.gardp.org/resource/no-observed-adverse-effect-level-noael/
-69	,Pre-clinical,No observed effect level (NOEL),https://revive.gardp.org/resource/no-observed-effect-level-noel/
+68,Pre-clinical,No observed adverse effect level (NOAEL),https://revive.gardp.org/resource/no-observed-adverse-effect-level-noael/
+69,Pre-clinical,No observed effect level (NOEL),https://revive.gardp.org/resource/no-observed-effect-level-noel/
 70,Clinical,Non-inferiority margin,https://revive.gardp.org/resource/non-inferiority-margin/
 71,Clinical,Non-inferiority trial,https://revive.gardp.org/resource/non-inferiority-trial/
 72,Clinical,Number needed to treat (NNT),https://revive.gardp.org/resource/number-needed-to-treat-nnt/
@@ -75,19 +75,19 @@ id,category,skill,definition
 74,Clinical,Orphan drug,https://revive.gardp.org/resource/orphan-drug/
 75,Clinical,"Outcome, clinical trial",https://revive.gardp.org/resource/outcome-clinical-trial/
 76,Clinical,Pandrug-resistant (PDR),https://revive.gardp.org/resource/pandrug-resistant/
-77	,Pre-clinical,Pharmacodynamics (PD),https://revive.gardp.org/resource/pharmacodynamics-pd/
-78	,Pre-clinical,Pharmacokinetics (PK),https://revive.gardp.org/resource/pharmacokinetics-pk/
-79	,Pre-clinical,Pharmacokinetics-pharmacodynamics (PK/PD),https://revive.gardp.org/resource/pharmacokinetics-pharmacodynamics-pk-pd/
+77,Pre-clinical,Pharmacodynamics (PD),https://revive.gardp.org/resource/pharmacodynamics-pd/
+78,Pre-clinical,Pharmacokinetics (PK),https://revive.gardp.org/resource/pharmacokinetics-pk/
+79,Pre-clinical,Pharmacokinetics-pharmacodynamics (PK/PD),https://revive.gardp.org/resource/pharmacokinetics-pharmacodynamics-pk-pd/
 80,Clinical,Pharmacovigilance,https://revive.gardp.org/resource/pharmacovigilance/
 81,Clinical,"Phase 1, 2, 3, 4 trials",https://revive.gardp.org/resource/phase-1234-trials/
 82,Clinical,Placebo-controlled trial,https://revive.gardp.org/resource/placebo-controlled-trial/
-83	,Pre-clinical,Plasma concentration,https://revive.gardp.org/resource/plasma-concentration/
+83,Pre-clinical,Plasma concentration,https://revive.gardp.org/resource/plasma-concentration/
 84,Discovery,Plasma protein binding,https://revive.gardp.org/resource/plasma-protein-binding/
 85,Clinical,Pneumonia,https://revive.gardp.org/resource/pneumonia/
 86,Clinical,Power (clinical trials),https://revive.gardp.org/resource/power-clinical-trials/
-87	,Pre-clinical,Preclinical development,https://revive.gardp.org/resource/preclinical-development/
+87,Pre-clinical,Preclinical development,https://revive.gardp.org/resource/preclinical-development/
 88,Discovery,Pro-drug,https://revive.gardp.org/resource/pro-drug/
-89	,Pre-clinical,Prolongation of QT interval,https://revive.gardp.org/resource/prolongation-of-qt-interval/
+89,Pre-clinical,Prolongation of QT interval,https://revive.gardp.org/resource/prolongation-of-qt-interval/
 90,Clinical,QT study,https://revive.gardp.org/resource/qt-study/
 91,Clinical,Qualified infectious disease product (QIDP),https://revive.gardp.org/resource/qualified-infectious-disease-product-qidp/
 92,Clinical,Quality assurance (clinical trials),https://revive.gardp.org/resource/quality-assurance-clinical-trials/
@@ -106,6 +106,6 @@ id,category,skill,definition
 105,Clinical,Therapeutic index,https://revive.gardp.org/resource/therapeutic-index/
 106,Clinical,Therapeutic window,https://revive.gardp.org/resource/therapeutic-window/
 107,Clinical,Tissue concentration,https://revive.gardp.org/resource/tissue-concentration/
-108	,Pre-clinical,Toxicity,https://revive.gardp.org/resource/toxicity/
+108,Pre-clinical,Toxicity,https://revive.gardp.org/resource/toxicity/
 109,Clinical,Urinary tract infection (UTI),https://revive.gardp.org/resource/urinary-tract-infection-uti/
 110,Clinical,Ventilator-associated pneumonia (VAP),https://revive.gardp.org/resource/ventilator-associated-pneumonia-vap/

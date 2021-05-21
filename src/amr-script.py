@@ -9,7 +9,7 @@ from py2neo import Node, Relationship
 from py2neo.database import Transaction
 from tqdm import tqdm
 
-from connection import populate_db, commit
+from connection import populate_db
 from constants import DATA_DIR
 
 
@@ -372,7 +372,7 @@ def add_skill_data(
     tx: Transaction,
     node_mapping_dict: dict
 ):
-    """Add skill category connection to AMR KG. """
+    """Add skill category connection to AMR KG."""
 
     skill_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "skill.csv"), usecols=["skill", "category"]
@@ -423,17 +423,17 @@ def main(argv):
 
     # Load ChEMBL data
     mic_df = pd.read_csv(
-        os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
-        sep='\t',
+        os.path.join(DATA_DIR, "MIC", "mic-data.tsv"),
+        sep="\t",
         dtype=str,
         usecols=[
-            'strain',
-            'Molecule ChEMBL ID',
-            'NAME',
-            'pIC50',
-            'Assay ChEMBL ID',
-            'Document Year',
-            'Document Journal'
+            "strain",
+            "Molecule ChEMBL ID",
+            "NAME",
+            "pIC50",
+            "Assay ChEMBL ID",
+            "Document Year",
+            "Document Journal"
         ]
     )
 

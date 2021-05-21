@@ -9,11 +9,13 @@ from py2neo import Node, Relationship
 from py2neo.database import Transaction
 from tqdm import tqdm
 
-from connection import populate_db
+from connection import populate_db, commit
 from constants import DATA_DIR
 
 
-def map_data(data_df: pd.DataFrame):
+def map_data(
+    data_df: pd.DataFrame
+):
     # Map to institute name
     institute_dict = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "institute.csv"),
@@ -60,11 +62,15 @@ def add_nodes(tx: Transaction):
     """Add nodes specific to AMR data"""
 
     node_dict = {
-        "Person": {},
-        "Institute": {},
-        "Skill": {},
-        "Pathogen": {},
-        "Project": {},
+        'Person': {},
+        'Institute': {},
+        'Skill': {},
+        'Pathogen': {},
+        'Project': {},
+        'Year': {},
+        'Chemical': {},
+        'IC50': {},
+        'Journal': {},
     }
 
     # Create person nodes
@@ -120,8 +126,7 @@ def add_nodes(tx: Transaction):
             project_name = project_name[0]
             project_property["name"] = project_name
             project_property[
-                "link"
-            ] = f"https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}"  # noqa
+                "link"] = f"https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}"
 
             node_dict["Project"][project_name] = Node("Project", **project_property)
             tx.create(node_dict["Project"][project_name])
@@ -136,13 +141,13 @@ def add_nodes(tx: Transaction):
     for pathogen_name, taxon_id in pathogen_df.values:
         pathogen_property = {}
 
-        if pd.notna(pathogen_name):
-            pathogen_property["name"] = pathogen_name
-            pathogen_property[
-                "info"
-            ] = f"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={taxon_id}"  # noqa
-            node_dict["Pathogen"][pathogen_name] = Node("Pathogen", **pathogen_property)
-            tx.create(node_dict["Pathogen"][pathogen_name])
+        if pd.isna(pathogen_name):
+            continue
+
+        pathogen_property['name'] = pathogen_name
+        pathogen_property['info'] = f'https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={taxon_id}'
+        node_dict['Pathogen'][pathogen_name] = Node('Pathogen', **pathogen_property)
+        tx.create(node_dict['Pathogen'][pathogen_name])
 
     # Create skill nodes
     skill_df = pd.read_csv(
@@ -164,11 +169,81 @@ def add_nodes(tx: Transaction):
             node_dict["Skill"][skill_name] = Node("Skill", **skill_property)
             tx.create(node_dict["Skill"][skill_name])
 
+    mic_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
+        sep='\t',
+        dtype=str,
+        usecols=[
+            'strain',
+            'Molecule ChEMBL ID',
+            'NAME',
+            'pIC50',
+            'Assay ChEMBL ID',
+            'Document Year',
+            'Document Journal'
+        ]
+    )
+
+    # Create chemical nodes
+    chemical_data = mic_df[['Molecule ChEMBL ID', 'NAME']]
+    chemical_data = chemical_data.drop_duplicates()
+    for chembl_id, name in chemical_data.values:
+        chemical_property = {}
+
+        if pd.notna(chembl_id):
+            chemical_property['chembl'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+
+        if pd.notna(name):
+            chemical_property['name'] = name
+
+        node_dict['Chemical'][name] = Node('Chemical', **chemical_property)
+        tx.create(node_dict['Chemical'][name])
+
+    # Create pIC50 nodes
+    ic50 = mic_df['pIC50'].unique().tolist()
+    for val in ic50:
+        ic50_property = {}
+
+        if pd.notna(val):
+            ic50_property['name'] = val
+        node_dict['IC50'][val] = Node('IC50', **ic50_property)
+        tx.create(node_dict['IC50'][val])
+
+    # Add journal information
+    journal_names = mic_df['Document Journal'].unique().tolist()
+    journal_names = ['Assay test' if pd.isna(x) else x for x in journal_names]
+
+    for name in journal_names:
+        journal_property = {}
+
+        if pd.notna(name):
+            journal_property['name'] = name
+
+        node_dict['Journal'][name] = Node('Journal', **journal_property)
+        tx.create(node_dict['Journal'][name])
+
+    # Add journal year
+    publication_years = mic_df['Document Year'].unique().tolist()
+
+    for year in publication_years:
+        year_property = {}
+
+        if pd.notna(year):
+            year_property['year'] = year
+
+            node_dict['Year'][year] = Node('Year', **year_property)
+            tx.create(node_dict['Year'][year])
+
     return node_dict
 
 
-def add_relations(tx: Transaction, df: pd.DataFrame, node_mapping_dict: dict):
-    """Add relations specific to AMR data."""
+def add_relations(
+    tx: Transaction,
+    df: pd.DataFrame,
+    mic_df: pd.DataFrame,
+    node_mapping_dict: dict
+):
+    """Add relations specific to AMR data. """
 
     for rows in tqdm(df.values, desc="Populating graph"):
         (
@@ -248,9 +323,56 @@ def add_relations(tx: Transaction, df: pd.DataFrame, node_mapping_dict: dict):
             works_with = Relationship(person_node, "WORKS_WITH", pathogen_3_node)
             tx.create(works_with)
 
+    for row in tqdm(mic_df.values, desc='Adding MIC relations'):
+        (
+            strain,
+            chembl_id,  # not needed
+            chemical,
+            pval,
+            assay_id,
+            doc_name,
+            doc_year
+        ) = row
 
-def add_skill_data(tx: Transaction, node_mapping_dict: dict):
-    """Add skill category connection to AMR KG."""
+        bact_node = node_mapping_dict['Pathogen'][strain]
+        chem_node = node_mapping_dict['Chemical'][chemical]
+
+        assay_property = {}
+        if pd.notna(assay_id):
+            assay_property['assay_info'] = f'https://www.ebi.ac.uk/chembl/assay_report_card/{assay_id}/'
+
+            assay_in = Relationship(
+                bact_node,
+                'ASSAY_IN',
+                chem_node,
+                **assay_property
+            )
+            tx.create(assay_in)
+
+        if pd.notna(pval):
+            p_node = node_mapping_dict['IC50'][pval]
+
+            has_pic50 = Relationship(chem_node, 'HAS_pIC50', p_node)
+            tx.create(has_pic50)
+
+        if pd.notna(doc_name):
+            journal_node = node_mapping_dict['Journal'][doc_name]
+
+            found_in = Relationship(chem_node, 'FOUND_IN', journal_node)
+            tx.create(found_in)
+
+        if pd.notna(doc_year):
+            year_node = node_mapping_dict['Year'][doc_year]
+
+            in_year = Relationship(chem_node, 'IN_YEAR', year_node)
+            tx.create(in_year)
+
+
+def add_skill_data(
+    tx: Transaction,
+    node_mapping_dict: dict
+):
+    """Add skill category connection to AMR KG. """
 
     skill_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "skill.csv"), usecols=["skill", "category"]
@@ -299,11 +421,32 @@ def main(argv):
 
     df = map_data(data_df=df)
 
+    # Load ChEMBL data
+    mic_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
+        sep='\t',
+        dtype=str,
+        usecols=[
+            'strain',
+            'Molecule ChEMBL ID',
+            'NAME',
+            'pIC50',
+            'Assay ChEMBL ID',
+            'Document Year',
+            'Document Journal'
+        ]
+    )
+
     # Add nodes
     node_map = add_nodes(tx=tx)
 
     # Add relations
-    add_relations(tx=tx, df=df, node_mapping_dict=node_map)
+    add_relations(
+        tx=tx,
+        df=df,
+        mic_df=mic_df,
+        node_mapping_dict=node_map
+    )
 
     # Add intra-skill relations
     add_skill_data(tx=tx, node_mapping_dict=node_map)

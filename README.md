@@ -1,18 +1,14 @@
 # AMR Knowledge Graph  
 
-----------
-
-To visualize the knowledge graph, please click on the icon below :
+To visualize the knowledge graph, please click on the icon : 
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
-----------
 
 ## Add new members?
 
-Fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to get access to the database.
+Fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to get access to the database and to keep it updated!
 
-__________
 
 # Partners
 <p align="center">

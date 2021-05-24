@@ -2,7 +2,7 @@
 
 To visualize the knowledge graph, please click on the icon : 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://binder.bioimagearchive.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
 
 ## Add new members?

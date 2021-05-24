@@ -1,6 +1,6 @@
 # Docker details
 
-To run the database, you can either build locally with [repo2docker](https://repo2docker.readthedocs.io/) or [run on mybinder.org](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
+To run the database, you can either build locally with [repo2docker](https://repo2docker.readthedocs.io/) or [run on mybinder.org](https://binder.bioimagearchive.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
 **NOTE: repo2docker does not work on Windows.**
 

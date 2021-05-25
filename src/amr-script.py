@@ -162,11 +162,20 @@ def add_nodes(tx: Transaction):
 
     skill_set_1 = skill_set_1.union(skill_set_2)
 
+    skill_def = {
+        skill: definition
+        for skill, definition in skill_df[['skill', 'definition']].values
+        if pd.notna(definition)
+    }
+
     for skill_name in skill_set_1:
         skill_property = {}
 
         if pd.notna(skill_name):
             skill_property["name"] = skill_name
+            if skill_name in skill_def:
+                skill_property['definition'] = skill_def[skill_name]
+
             node_dict["Skill"][skill_name] = Node("Skill", **skill_property)
             tx.create(node_dict["Skill"][skill_name])
 

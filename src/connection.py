@@ -63,7 +63,3 @@ def populate_db(db_name: str):
     tx = conn.begin()
     return tx
 
-
-def commit(db_name: str, tx: Transaction):
-    conn = Graph(URL, auth=(ADMIN_NAME, ADMIN_PASS), name=db_name)
-    conn.commit(tx)

@@ -1,0 +1,6 @@
+name: Data connection
+run: |
+  cd src
+  git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/YojanaGadiya/${{ secrets.SECRET_REPO }}.git
+  cp ./${{ secrets.SECRET_REPO }}/gdrive/credential.json ./
+  python gform.py

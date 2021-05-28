@@ -64,6 +64,13 @@ echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
 echo "dbms.default_database=amr" >> $CONF_FILE
 
+# Get data
+run: |
+  cd src
+  git clone https://${ secrets.MY_GITHUB_TOKEN }}@github.com/YojanaGadiya/${{ secrets.SECRET_REPO }}.git
+  cp ./${{ secrets.SECRET_REPO }}/gdrive/credential.json ./
+  python gform.py
+
 # populate the default DB in neo4j
 
 (${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"

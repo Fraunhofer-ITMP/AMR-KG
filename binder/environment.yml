@@ -13,3 +13,4 @@ dependencies:
    - py2neo==2021.0.1
    - gspread
    - oauth2client
+   - pygithub

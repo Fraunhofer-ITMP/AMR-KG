@@ -79,7 +79,7 @@ def add_person_email(output_file_path: str, sep=","):
 
 
 def add_institute(output_file_path: str, sep=","):
-    institute_list = list(range(1, 52))
+    institute_list = list(range(1, 55))
 
     df = pd.read_csv(
         output_file_path,
@@ -148,12 +148,12 @@ def add_skill(output_file_path: str, sep=","):
 
 def main(
     output_file_path: str,
-    has_institute: bool = False,
-    has_email: bool = False,
-    has_orcid: bool = False,
-    has_pathogen: bool = False,
-    has_skill: bool = False,
-    has_project: bool = False,
+    has_institute: bool = True,
+    has_email: bool = True,
+    has_orcid: bool = True,
+    has_pathogen: bool = True,
+    has_skill: bool = True,
+    has_project: bool = True,
 ):
     get_anonymized_names(output_file_path=output_file_path)
 

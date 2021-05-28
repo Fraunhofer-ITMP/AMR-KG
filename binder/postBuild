@@ -64,12 +64,14 @@ echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
 echo "dbms.default_database=amr" >> $CONF_FILE
 
-# Get data
-run: |
-  cd src
-  git clone https://${ secrets.MY_GITHUB_TOKEN }}@github.com/YojanaGadiya/${{ secrets.SECRET_REPO }}.git
-  cp ./${{ secrets.SECRET_REPO }}/gdrive/credential.json ./
-  python gform.py
+# Get data from survey
+cd src
+
+REPO_TOKEN = ${secrets.MY_GITHUB_TOKEN}  #TODO: Would repo token be accessible in the code now?
+git clone https://REPO_TOKEN@github.com/YojanaGadiya/${secrets.SECRET_REPO}.git
+cp ./${secrets.SECRET_REPO}/gdrive/credential.json ./
+
+python gform.py
 
 # populate the default DB in neo4j
 

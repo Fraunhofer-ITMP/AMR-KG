@@ -132,3 +132,6 @@ dmypy.json
 
 # Pycharm settings
 .idea
+
+# Remove private folders
+local-run

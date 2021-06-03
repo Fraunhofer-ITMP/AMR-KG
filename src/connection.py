@@ -4,7 +4,6 @@ import logging
 
 from py2neo import Graph, SystemGraph
 from py2neo.database.work import ClientError
-from py2neo.database import Transaction
 
 from constants import ADMIN_NAME, ADMIN_PASS, URL
 

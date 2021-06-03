@@ -6,7 +6,7 @@
 import pandas as pd
 
 from github import Github
-from github.NamedUser import NamedUser
+import requests
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -32,26 +32,53 @@ def get_data():
     return sheet.get_all_values()
 
 
-def send_invite(
+def send_organization_invite(
     mailing_list: list
-):
-    # TODO: Test if this works
+) -> None:
     git = Github(GITHUB_TOKEN)
+
+    repo = git.get_organization('ITeMP-temp')
+
+    h = {
+        'Content-type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+
+    for mail in mailing_list:
+        d = requests.post(
+            f'{repo.url}/invitations',
+            json={
+                'email': mail,
+            },
+            headers=h,
+            auth=('YojanaGadiya', GITHUB_TOKEN),
+        )
+
+        if d.status_code == 201:
+            print(f'Awaiting response from {mail}')
+
+    return None
+
+
+def send_repo_invite(
+    username_list: list,
+) -> None:
+    git = Github(GITHUB_TOKEN)
+
     repo = git.get_organization('ITeMP-temp').get_repo('AMR-KG')
 
-    # for user in mailing_list:
-    #
-    #     github_user = Github.get_user('YojanaGadiya')
-    #     print(github_user)
-    #     # repo.add_to_collaborators(
-    #     #
-    #     # )
+    for name in username_list:
+        if name:
+            repo.add_to_collaborators(
+                collaborator=name,
+                permission='pull',
+            )
+
+    return None
 
 
 def save_data():
     data_list = get_data()
-
-    # TODO: Fix code based on GitHub user name added to the survey.
 
     df = pd.DataFrame(
         columns=[
@@ -71,7 +98,7 @@ def save_data():
 
     col_names = data_list[0]
 
-    mails = []
+    username_list = []
 
     for data in data_list[2:]:
         values = {
@@ -80,29 +107,30 @@ def save_data():
                 if k
         }
 
-        mails.append(values['Email'])
+        username_list.append(values['GitHub UserName'])
 
         tmp_df = pd.DataFrame({
-                'timestamp': values['Timestamp'],
-                'first_name': values['First name'],
-                'surname': values['Surname'],
-                'email': values['Email'],
-                'projects': values['Which project(s) are you involved in?'],
-                'institute': values['Which research institute are you affiliated with?'],
-                'discovery_skills': values['Please select the most relevant skill(s) in DISCOVERY'],
-                'pre_clinical_skills': values['Please select the most relevant skill(s) in PRE-CLINICAL DEVELOPMENT'],
-                'clinical_skills': values['Please select the most relevant skill(s) in CLINICAL DEVELOPMENT'],
-                'pathogens': values['Please choose the appropriate strain(s)'],
-                'orcid': values['ORCID ID (Ex. https://orcid.org/0000-0002-7683-0452)'],
+            'timestamp': values['Timestamp'],
+            'first_name': values['First name'],
+            'surname': values['Surname'],
+            'email': values['Email'],
+            'projects': values['Which project(s) are you involved in?'],
+            'institute': values['Which research institute are you affiliated with?'],
+            'discovery_skills': values['Please select the most relevant skill(s) in DISCOVERY'],
+            'pre_clinical_skills': values['Please select the most relevant skill(s) in PRE-CLINICAL DEVELOPMENT'],
+            'clinical_skills': values['Please select the most relevant skill(s) in CLINICAL DEVELOPMENT'],
+            'pathogens': values['Please choose the appropriate strain(s)'],
+            'orcid': values['ORCID ID (Ex. https://orcid.org/0000-0002-7683-0452)'],
+            'username': values['GitHub UserName']
         }, index=[1])
 
         df = pd.concat([df, tmp_df], ignore_index=True)
 
-    # send_invite(mailing_list=mails)
+    send_repo_invite(username_list=username_list)
 
-    print(df)
+    # pd.set_option('display.max_columns', None)
+    # print(df)
 
 
 if __name__ == '__main__':
     save_data()
-

@@ -1,6 +1,6 @@
 # <p align="center"> **AMR Knowledge Graph** </p>
 
-To visualize the knowledge graph, please click on the icon : 
+To visualize the knowledge graph, please click on the icon below: 
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 

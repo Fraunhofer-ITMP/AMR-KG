@@ -4,6 +4,8 @@ To visualize the knowledge graph, please click on the icon immediately here belo
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
+You will land on the desktop of a virtual machine where you can start work: please look here for an introductory video.
+
 
 ## Add new members?
 

@@ -6,7 +6,10 @@ To visualize the knowledge graph, please click on the icon immediately here belo
 
 
 ## Add new members?
-If you are not registered yet you will no thave access to the resource. Please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to receive credentials for accessing to the database and to keep it updated!
+
+If you are not registered yet you will not have access to the resource.
+
+Please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to receive credentials for accessing to the database and to keep it updated!
 
 
 # Partners

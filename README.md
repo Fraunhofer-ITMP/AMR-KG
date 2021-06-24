@@ -13,7 +13,7 @@ Please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBW
 
 ## Finding it difficult to search?
 
-For assistance in searching and esploring the knowledge graph please look here for our [introductory video](https://youtu.be/MPWYLQI0iiM).
+For assistance in searching and exploring the knowledge graph please look here for our [introductory video](https://youtu.be/MPWYLQI0iiM).
 
 # Partners
 <p align="center">

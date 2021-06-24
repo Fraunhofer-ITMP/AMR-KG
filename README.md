@@ -4,8 +4,6 @@ To visualize the knowledge graph, please click on the icon immediately here belo
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
 
-You will land on the desktop of a virtual machine where you can start work: please look here for an introductory video.
-
 
 ## Add new members?
 
@@ -13,6 +11,9 @@ If you are not registered yet you will not have access to the resource.
 
 Please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to receive credentials for accessing to the database and to keep it updated!
 
+## Finding it difficult to search?
+
+For assistance in searching and esploring the knowledge graph please look here for our [introductory video](https://youtu.be/MPWYLQI0iiM).
 
 # Partners
 <p align="center">

@@ -11,13 +11,13 @@ To get access to the resource, please take few seconds to fill in this [survey f
 
 For assitance in filling in the survey, have a look at our [survey filling video](https://www.youtube.com/watch?v=bvZe1LkexSs&ab_channel=COMBINEAMR)
 
-## New Updates
-
-For getting access to new updates and assistance to search the knowledge graph, make sure to subscribe our YouTube channel [COMBINE AMR](https://www.youtube.com/channel/UCZRX7P2-ajOEI4hg2nhRBfA)
-
 ## Finding it difficult to search?
 
 For assistance in searching and exploring the knowledge graph please look here for our [introductory video](https://www.youtube.com/watch?v=QCOD7F3Az8E&ab_channel=COMBINEAMR).
+
+## Want to be updated?
+
+For getting access to new updates and assistance to search the knowledge graph, make sure to subscribe our YouTube channel [COMBINE AMR](https://www.youtube.com/channel/UCZRX7P2-ajOEI4hg2nhRBfA).
 
 # Partners
 <p align="center">

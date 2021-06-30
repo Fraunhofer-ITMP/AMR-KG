@@ -7,13 +7,17 @@ To visualize the knowledge graph, please click on the icon immediately here belo
 
 ## Add new members?
 
-If you are not registered yet you will not have access to the resource.
+To get access to the resource, please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47). Upon successful submission of the survey, you will receive credentials for accessing the database!
 
-Please take few seconds to fill in this [survey form](https://forms.gle/nvv7GGBWE7uineg47) to receive credentials for accessing to the database and to keep it updated!
+For assitance in filling in the survey, have a look at our [survey filling video](https://www.youtube.com/watch?v=bvZe1LkexSs&ab_channel=COMBINEAMR)
+
+## New Updates
+
+For getting access to new updates and assistance to search the knowledge graph, make sure to subscribe our YouTube channel [COMBINE AMR](https://www.youtube.com/channel/UCZRX7P2-ajOEI4hg2nhRBfA)
 
 ## Finding it difficult to search?
 
-For assistance in searching and exploring the knowledge graph please look here for our [introductory video](https://youtu.be/MPWYLQI0iiM).
+For assistance in searching and exploring the knowledge graph please look here for our [introductory video](https://www.youtube.com/watch?v=QCOD7F3Az8E&ab_channel=COMBINEAMR).
 
 # Partners
 <p align="center">

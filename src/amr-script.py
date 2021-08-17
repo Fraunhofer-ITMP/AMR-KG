@@ -12,6 +12,7 @@ from tqdm import tqdm
 
 from connection import populate_db
 from constants import DATA_DIR
+from constants import ENCODING
 
 
 def map_data(
@@ -22,6 +23,7 @@ def map_data(
         os.path.join(DATA_DIR, "AMR", "institute.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     ).to_dict()["institute"]
 
     data_df["institute"] = data_df["institute"].map(institute_dict)
@@ -31,6 +33,7 @@ def map_data(
         os.path.join(DATA_DIR, "AMR", "project.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     ).to_dict()["project"]
 
     for i in ["project_1", "project_2"]:
@@ -41,6 +44,7 @@ def map_data(
         os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     ).to_dict()["pathogen"]
 
     for i in ["pathogen_1", "pathogen_2", "pathogen_3"]:
@@ -51,6 +55,7 @@ def map_data(
         os.path.join(DATA_DIR, "AMR", "skill.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     ).to_dict()["skill"]
 
     for i in ["skill_1", "skill_2", "skill_3", "skill_4"]:
@@ -78,6 +83,7 @@ def add_nodes(tx: Transaction):
     person_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "person.csv"),
         usecols=["contact", "email", "orcid"],
+        encoding=ENCODING
     )
 
     for name, email, orcid in person_df.values:
@@ -98,7 +104,8 @@ def add_nodes(tx: Transaction):
     # Create institute nodes
     institute_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "institute.csv"),
-        usecols=['institute', 'link']
+        usecols=['institute', 'link'],
+        encoding=ENCODING
     )
 
     for institute_name, institute_page in institute_df.values:
@@ -118,6 +125,7 @@ def add_nodes(tx: Transaction):
         os.path.join(DATA_DIR, "AMR", "project.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     )
 
     for project_name in project_df.values:
@@ -137,6 +145,7 @@ def add_nodes(tx: Transaction):
         os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     )
 
     for pathogen_name, taxon_id in pathogen_df.values:
@@ -155,6 +164,7 @@ def add_nodes(tx: Transaction):
         os.path.join(DATA_DIR, "AMR", "skill.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     )
 
     skill_set_1 = set(skill_df["skill"].tolist())
@@ -191,7 +201,8 @@ def add_nodes(tx: Transaction):
             'Assay ChEMBL ID',
             'Document Year',
             'Document Journal'
-        ]
+        ],
+        encoding=ENCODING
     )
 
     # Create chemical nodes
@@ -385,7 +396,9 @@ def add_skill_data(
     """Add skill category connection to AMR KG."""
 
     skill_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "skill.csv"), usecols=["skill", "category"]
+        os.path.join(DATA_DIR, "AMR", "skill.csv"),
+        usecols=["skill", "category"],
+        encoding=ENCODING
     )
 
     skill_df["category"] = skill_df["category"].apply(lambda x: x + "_group")
@@ -406,10 +419,13 @@ def add_institute_data(
         os.path.join(DATA_DIR, "AMR", "project.csv"),
         dtype=str,
         index_col="id",
+        encoding=ENCODING
     ).to_dict()["project"]
 
     institute_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "institute.csv"), usecols=['institute', 'projects']
+        os.path.join(DATA_DIR, "AMR", "institute.csv"),
+        usecols=['institute', 'projects'],
+        encoding=ENCODING
     )
 
     for row in institute_df.values:
@@ -459,6 +475,7 @@ def main(argv):
             "skill_3",
             "skill_4",
         ],
+        encoding=ENCODING
     )
 
     df = map_data(data_df=df)
@@ -476,7 +493,8 @@ def main(argv):
             "Assay ChEMBL ID",
             "Document Year",
             "Document Journal"
-        ]
+        ],
+        encoding=ENCODING
     )
 
     # Add nodes

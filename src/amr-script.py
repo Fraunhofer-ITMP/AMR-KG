@@ -80,6 +80,7 @@ def add_nodes(
         'Journal': {},
     }
 
+    
     person_df = data_df[['first_name', 'last_name', 'email', 'orcid']]
 
     # Create person nodes
@@ -581,7 +582,7 @@ def main(argv):
         ],
         encoding=ENCODING
     )
-    df.rename({
+    df = df.rename(columns={
         'First name': 'first_name',
         'Surname': 'last_name',
         'Email': 'email',

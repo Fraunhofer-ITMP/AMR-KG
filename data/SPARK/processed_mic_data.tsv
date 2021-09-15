@@ -1,0 +1,144 @@
+Compound Name	SMILES	Chembl #	PubMed ID	Curated & Transformed MIC Data: MIC (in microM) (microM)	Curated & Transformed MIC Data: Species	Curated & Transformed MIC Data: DOI	pubchem	chembl
+SPK-0258452	OB1OCC2=CC=CC(OCCC[N+]3=CC=CC=C3)=C12		33228356	59.2	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258451	NC(=[NH2+])NCCCOC1=C2B(O)OCC2=CC=C1		33228356	128	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258451	NC(=[NH2+])NCCCOC1=C2B(O)OCC2=CC=C1		33228356	257	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258450	[NH3+]CCCOC1=C2B(O)OCC2=CC=C1		33228356	77.3	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258450	[NH3+]CCCOC1=C2B(O)OCC2=CC=C1		33228356	9.66	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258450	[NH3+]CCCOC1=C2B(O)OCC2=CC=C1		33228356	9.66	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258449	OCCCOC1=C2B(O)OCC2=CC=C1		33228356	76.9	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25132451.0	SCHEMBL3447000
+SPK-0258449	OCCCOC1=C2B(O)OCC2=CC=C1		33228356	4.81	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25132451.0	SCHEMBL3447000
+SPK-0258449	OCCCOC1=C2B(O)OCC2=CC=C1		33228356	38.5	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25132451.0	SCHEMBL3447000
+SPK-0258448	CC(=O)NCCCOC1=C2B(O)OCC2=CC=C1		33228356	128	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25131739.0	SCHEMBL3446584
+SPK-0258448	CC(=O)NCCCOC1=C2B(O)OCC2=CC=C1		33228356	4.01	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25131739.0	SCHEMBL3446584
+SPK-0258448	CC(=O)NCCCOC1=C2B(O)OCC2=CC=C1		33228356	32.1	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	25131739.0	SCHEMBL3446584
+SPK-0258445	[NH3+]CC1OB(O)C2=C(OCCCO)C=CC=C12		33228356	16.9	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258445	[NH3+]CC1OB(O)C2=C(OCCCO)C=CC=C12		33228356	16.9	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258445	[NH3+]CC1OB(O)C2=C(OCCCO)C=CC=C12		33228356	16.9	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258443	NC(=[NH2+])NCC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	130	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258443	NC(=[NH2+])NCC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	130	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258442	NC(=[NH2+])NCC#CC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	15.5	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258442	NC(=[NH2+])NCC#CC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	124	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258441	[NH3+]CC#CC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	1.06	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258441	[NH3+]CC#CC1=CN=C(N=C1)N1C=NC(CN2CCCC(C2)C2=NC(=CC(O)=N2)C2=CC=CS2)=C1		33228356	16.9	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258439	NC(=[NH2+])NCCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	84.4	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258439	NC(=[NH2+])NCCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	84.4	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258438	[NH3+]CCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	379	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258436	NC(=[NH2+])NCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	87.6	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258436	NC(=[NH2+])NCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	87.6	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258434	OCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	12.3	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	72724832.0	CHEMBL3099715
+SPK-0258434	OCCNC1=CC(=NC(=N1)C1=NNC2=CN=CC=C12)C(F)(F)F		33228356	24.7	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	72724832.0	CHEMBL3099715
+SPK-0258433	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCC[N+]3=CC=CC=C3)C2=C1		33228356	39.8	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258433	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCC[N+]3=CC=CC=C3)C2=C1		33228356	39.8	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258432	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCCNC(N)=[NH2+])C2=C1		33228356	5.25	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258432	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCCNC(N)=[NH2+])C2=C1		33228356	5.25	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258432	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCCNC(N)=[NH2+])C2=C1		33228356	42.0	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258431	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCC[NH3+])C2=C1		33228356	11.8	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	118988516.0	CHEMBL3425693
+SPK-0258431	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCC[NH3+])C2=C1		33228356	23.6	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	118988516.0	CHEMBL3425693
+SPK-0258431	CC1=CC=C2N=C(\C=C\C3=CC=C(Cl)C=C3)N=C(NCC[NH3+])C2=C1		33228356	23.6	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	118988516.0	CHEMBL3425693
+SPK-0258430	CC(=O)NCCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC=C(C)C=C12		33228356	84.0	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	139497067.0	SCHEMBL21365968
+SPK-0258430	CC(=O)NCCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC=C(C)C=C12		33228356	42.0	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	139497067.0	SCHEMBL21365968
+SPK-0258429	CC[NH+](CC)CCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC=C(C)C=C12		33228356	40.5	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258429	CC[NH+](CC)CCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC=C(C)C=C12		33228356	20.3	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258428	[NH3+]CCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC3=C(C=CC=C3)C=C12		33228356	5.34	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715	118988515.0	CHEMBL3425702
+SPK-0258428	[NH3+]CCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC3=C(C=CC=C3)C=C12		33228356	10.7	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715	118988515.0	CHEMBL3425702
+SPK-0258427	CC[NH+](CC)CCNC1=NC(\C=C\C2=CC=C(Cl)C=C2)=NC2=CC3=C(C=CC=C3)C=C12		33228356	9.28	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258426	CN1C(=O)C=C(C)C2=C1C1=C3N(C(C[N+]4=CC=CC=C4)CO1)C(=O)C=C(C)C3=C2		33228356	41.2	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258425	CN1C(=O)C=C(C)C2=C1C1=C3N(C(CNC(N)=[NH2+])CO1)C(=O)C=C(C)C3=C2		33228356	43.5	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258425	CN1C(=O)C=C(C)C2=C1C1=C3N(C(CNC(N)=[NH2+])CO1)C(=O)C=C(C)C3=C2		33228356	5.44	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258424	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CC[N+]3=CC=CC=C3)CC2=C1		33228356	0.519	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258424	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CC[N+]3=CC=CC=C3)CC2=C1		33228356	0.519	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258424	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CC[N+]3=CC=CC=C3)CC2=C1		33228356	133	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258423	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CCNC(N)=[NH2+])CC2=C1		33228356	0.271	Staphylococcus aureus	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258423	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CCNC(N)=[NH2+])CC2=C1		33228356	1.09	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258423	CN(CC1=C(C)C2=CC=CC=C2O1)C(=O)\C=C\C1=CN=C2NC(=O)C(CCNC(N)=[NH2+])CC2=C1		33228356	139	Escherichia coli	https://dx.doi.org/10.1021/acsinfecdis.0c00715		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.0574	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.463	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	3.70	Escherichia coli	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	14.8	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.463	Acinetobacter baumannii	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	1.85	Haemophilus influenzae	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.0574	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	3.70	Enterococcus faecium	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	1.85	Escherichia coli	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	7.41E-03	Escherichia coli	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	14.8	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	29.6	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	14.8	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	29.6	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.231	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	3.70	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.117	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.463	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.926	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.926	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.231	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.231	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.231	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258365	OCCN1C(=O)C=CC2=C1C(CCC13CCC(CC1)(CO3)NCC1=NC3=C(OCC(=O)N3)C=C1)=C(Cl)C=N2		27246784	0.217	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16		
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	0.267	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	8.56	Escherichia coli	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	17.1	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	8.56	Acinetobacter baumannii	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Haemophilus influenzae	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	17.1	Enterococcus faecium	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	4.28	Escherichia coli	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	0.135	Escherichia coli	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	17.1	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	137	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	17.1	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	68.4	Pseudomonas aeruginosa	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	17.1	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	0.535	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	2.14	Staphylococcus aureus	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258364	O[C@@]1(CN2CCC(CC2)NCC2=CC3=C(OCCO3)C=N2)CN2C3=C(C=CC2=O)N=CC(F)=C13		27246784	1.07	Streptococcus pneumoniae	https://doi.org/10.1128/AAC.00619-16	23633343.0	SCHEMBL2767486
+SPK-0258360	OC1=CC=CC=C1C1=CC=C(S1)[N+]([O-])=O		29110989	145	Escherichia coli	https://dx.doi.org/10.1016/j.bmcl.2017.10.036	134143565.0	CHEMBL3916579
+SPK-0258309	COC1=CN=C2C=CC(=O)N(C[C@H](O)[C@@H]3CC[C@H](CO3)NCC3=NC4=C(OCC(=O)N4)C=C3)C2=C1		28406300	1.04	Staphylococcus aureus	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258309	COC1=CN=C2C=CC(=O)N(C[C@H](O)[C@@H]3CC[C@H](CO3)NCC3=NC4=C(OCC(=O)N4)C=C3)C2=C1		28406300	4.15	Escherichia coli	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258309	COC1=CN=C2C=CC(=O)N(C[C@H](O)[C@@H]3CC[C@H](CO3)NCC3=NC4=C(OCC(=O)N4)C=C3)C2=C1		28406300	16.6	Acinetobacter baumannii	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258308	COC1=CC=C2N=CC=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NN=C4OCCSC4=C3)C2=N1		28406300	0.534	Staphylococcus aureus	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258308	COC1=CC=C2N=CC=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NN=C4OCCSC4=C3)C2=N1		28406300	17.1	Escherichia coli	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258307	COC1=CC=C2N=CC=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCSC4=C3)C2=N1		28406300	0.128	Staphylococcus aureus	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258307	COC1=CC=C2N=CC=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCSC4=C3)C2=N1		28406300	4.28	Escherichia coli	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258307	COC1=CC=C2N=CC=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCSC4=C3)C2=N1		28406300	4.28	Acinetobacter baumannii	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258306	COC1=CC=C2N=CC(F)=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCOC4=C3)C2=N1		28406300	0.128	Staphylococcus aureus	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258306	COC1=CC=C2N=CC(F)=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCOC4=C3)C2=N1		28406300	2.13	Escherichia coli	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258306	COC1=CC=C2N=CC(F)=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCOC4=C3)C2=N1		28406300	0.532	Acinetobacter baumannii	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0258306	COC1=CC=C2N=CC(F)=C(C[C@H](N)[C@@H]3CC[C@H](CO3)NCC3=NC=C4OCCOC4=C3)C2=N1		28406300	17.0	Pseudomonas aeruginosa	https://dx.doi.org/10.1021/acs.jmedchem.6b01831		
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	25.0	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	50.1	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Escherichia coli	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Escherichia coli	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	100	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	100	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256471	Nc1nc(c[nH]1)-c1c[nH]c2cc(Br)ccc12	CHEMBL4213261	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946211.0	CHEMBL4300103
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	25.0	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	50.1	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Escherichia coli	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Escherichia coli	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	100	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	100	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	100	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256470	Nc1nc(c[nH]1)-c1c[nH]c2ccc(Br)cc12	CHEMBL4209682	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947699.0	CHEMBL4302148
+SPK-0256461	CCCn1cc(-c2ccnc(N)n2)c2cc(Br)ccc12	CHEMBL4204404	30034604	100	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946278.0	CHEMBL4299899
+SPK-0256460	CCn1cc(-c2ccnc(N)n2)c2cc(Br)ccc12	CHEMBL4217358	30034604	200	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946626.0	CHEMBL4300612
+SPK-0256459	CCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4216603	30034604	200	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946905.0	CHEMBL4301111
+SPK-0256458	Cn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4207595	30034604	200	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947522.0	CHEMBL4301943
+SPK-0256457	CCCCn1cc(-c2ccnc(N)n2)c2cc(Br)ccc12	CHEMBL4211324	30034604	50.0	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145946357.0	CHEMBL4300099
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	200	Staphylococcus aureus	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	100	Escherichia coli	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	100	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	200	Acinetobacter baumannii	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228
+SPK-0256456	CCCn1cc(-c2ccnc(N)n2)c2ccc(Br)cc12	CHEMBL4213398	30034604	200	Klebsiella pneumoniae	https://dx.doi.org/10.1021/acsmedchemlett.8b00161	145947054.0	CHEMBL4301228

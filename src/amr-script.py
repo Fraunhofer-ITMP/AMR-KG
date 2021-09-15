@@ -80,7 +80,6 @@ def add_nodes(
         'Journal': {},
     }
 
-    
     person_df = data_df[['first_name', 'last_name', 'email', 'orcid']]
 
     # Create person nodes

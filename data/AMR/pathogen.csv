@@ -1,7 +1,7 @@
 id,pathogen,ncbitaxon
 1,Acinetobacter baumannii,470
 2,Burkholderia cepacia,292
-3,Campylobacter sp.,205
+3,Campylobacter spp.,205
 4,Chlamydia,810
 5,Clostridium difficile,1496
 6,Enterobacteriaceae,543
@@ -17,9 +17,8 @@ id,pathogen,ncbitaxon
 16,Pseudomonas aeruginosa,287
 17,Salmonella,590
 18,Serratia,613
-19,Shigella sp.,625
+19,Shigella spp.,625
 20,Staphylococcus aureus,1280
 21,Streptococcus,1301
 22,Streptococcus pneumoniae,1313
 23,Streptococcus pyogenes,1314
-24,Proteus mirabilis,584

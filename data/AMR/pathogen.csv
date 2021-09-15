@@ -1,7 +1,7 @@
 pathogen,ncbitaxon
 Acinetobacter baumannii,470
 Burkholderia cepacia,292
-Campylobacter spp.,205
+Campylobacter sp.,205
 Chlamydia,810
 Clostridium difficile,1496
 Enterobacteriaceae,543
@@ -18,7 +18,7 @@ Proteus,583
 Pseudomonas aeruginosa,287
 Salmonella,590
 Serratia,613
-Shigella spp.,625
+Shigella sp.,625
 Staphylococcus aureus,1280
 Streptococcus,1301
 Streptococcus pneumoniae,1313

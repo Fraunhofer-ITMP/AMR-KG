@@ -1,24 +1,25 @@
-id,pathogen,ncbitaxon
-1,Acinetobacter baumannii,470
-2,Burkholderia cepacia,292
-3,Campylobacter spp.,205
-4,Chlamydia,810
-5,Clostridium difficile,1496
-6,Enterobacteriaceae,543
-7,Enterococcus faecium,1352
-8,Escherichia coli,562
-9,Haemophilus influenzae,727
-10,Helicobacter pylori,210
-11,Klebsiella pneumoniae,573
-12,Mycobacterium avium complex,37162
-13,Mycobacterium tuberculosis,1773
-14,Neisseria gonorrhoeae,485
-15,Proteus,583
-16,Pseudomonas aeruginosa,287
-17,Salmonella,590
-18,Serratia,613
-19,Shigella spp.,625
-20,Staphylococcus aureus,1280
-21,Streptococcus,1301
-22,Streptococcus pneumoniae,1313
-23,Streptococcus pyogenes,1314
+pathogen,ncbitaxon
+Acinetobacter baumannii,470
+Burkholderia cepacia,292
+Campylobacter spp.,205
+Chlamydia,810
+Clostridium difficile,1496
+Enterobacteriaceae,543
+Enterococcus faecium,1352
+Escherichia coli,562
+Haemophilus influenzae,727
+Helicobacter pylori,210
+Klebsiella pneumoniae,573
+Mycobacterium avium complex,37162
+Mycobacterium tuberculosis,1773
+Neisseria gonorrhoeae,485
+Plasmodium falciparum,5833
+Proteus,583
+Pseudomonas aeruginosa,287
+Salmonella,590
+Serratia,613
+Shigella spp.,625
+Staphylococcus aureus,1280
+Streptococcus,1301
+Streptococcus pneumoniae,1313
+Streptococcus pyogenes,1314

@@ -2,7 +2,6 @@
 
 import getopt
 import os
-import random
 import sys
 
 import pandas as pd
@@ -11,8 +10,7 @@ from py2neo.database import Transaction
 from tqdm import tqdm
 
 from connection import populate_db
-from constants import DATA_DIR
-from constants import ENCODING
+from constants import DATA_DIR, ENCODING
 
 
 def map_data(
@@ -64,8 +62,11 @@ def map_data(
     return data_df
 
 
-def add_nodes(tx: Transaction):
-    """Add nodes specific to AMR data"""
+def add_nodes(
+    data_df: pd.DataFrame,
+    tx: Transaction
+):
+    """Add nodes specific to data """
 
     node_dict = {
         'Person': {},
@@ -79,74 +80,86 @@ def add_nodes(tx: Transaction):
         'Journal': {},
     }
 
-    # Create person nodes
-    person_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "person.csv"),
-        usecols=["contact", "email", "orcid"],
-        encoding=ENCODING
-    )
+    person_df = data_df[['first_name', 'last_name', 'email', 'orcid']]
 
-    for name, email, orcid in person_df.values:
+    # Create person nodes
+    for row in person_df.values:
+        (
+            first_name,
+            last_name,
+            email,
+            orcid,
+        ) = row
         person_property = {}
 
-        if pd.notna(name):
-            person_property["name"] = name
+        if pd.notna(first_name) and pd.notna(last_name):
+            name = first_name.capitalize() + ' ' + last_name.capitalize()
+        else:
+            continue
+
+        if name in node_dict:
+            continue
+
+        person_property['name'] = name
 
         if pd.notna(email):
-            person_property["email"] = email
+            person_property['email'] = email
 
         if pd.notna(orcid):
-            person_property["orcid"] = orcid
+            person_property['orcid'] = orcid if 'https' in orcid else f' https://orcid.org/{orcid}'
 
-        node_dict["Person"][name] = Node("Person", **person_property)
-        tx.create(node_dict["Person"][name])
+        node_dict['Person'][name] = Node('Person', **person_property)
+        tx.create(node_dict['Person'][name])
 
     # Create institute nodes
     institute_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "institute.csv"),
-        usecols=['institute', 'link'],
-        encoding=ENCODING
+        os.path.join(DATA_DIR, 'AMR', 'institute.csv'),
+        usecols=['institute', 'link']
     )
 
     for institute_name, institute_page in institute_df.values:
         institute_property = {}
 
         if pd.notna(institute_name):
-            institute_property["name"] = institute_name
-            institute_property["link"] = institute_page
+            institute_property['name'] = institute_name
+            institute_property['link'] = institute_page
 
-            node_dict["Institute"][institute_name] = Node(
-                "Institute", **institute_property
-            )
-            tx.create(node_dict["Institute"][institute_name])
+            node_dict['Institute'][institute_name] = Node('Institute', **institute_property)
+            tx.create(node_dict['Institute'][institute_name])
 
     # Create project nodes
     project_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "project.csv"),
+        os.path.join(DATA_DIR, 'AMR', 'project.csv'),
         dtype=str,
-        index_col="id",
-        encoding=ENCODING
-    )
+        index_col='id',
+    )['project']
 
     for project_name in project_df.values:
         project_property = {}
 
         if pd.notna(project_name):
-            project_name = project_name[0]
-            project_property["name"] = project_name
+            project_property['name'] = project_name
             project_property[
-                "link"] = f"https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}"
+                'link'] = f'https://www.imi.europa.eu/projects-results/project-factsheets/{project_name.lower()}'
 
-            node_dict["Project"][project_name] = Node("Project", **project_property)
-            tx.create(node_dict["Project"][project_name])
+            node_dict['Project'][project_name] = Node('Project', **project_property)
+            tx.create(node_dict['Project'][project_name])
+
+    # List of pathogens from data file
+    interested_pathogen = []
+    for i in data_df['pathogens'].values:
+        if pd.notna(i):
+            p = i.split(', ')
+            interested_pathogen.extend(p)
+
+    interested_pathogen = set(interested_pathogen)
 
     # Create pathogen node
     pathogen_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
+        os.path.join(DATA_DIR, 'AMR', 'pathogen.csv'),
         dtype=str,
-        index_col="id",
-        encoding=ENCODING
     )
+    pathogen_df = pathogen_df[pathogen_df['pathogen'].isin(interested_pathogen)]
 
     for pathogen_name, taxon_id in pathogen_df.values:
         pathogen_property = {}
@@ -161,16 +174,16 @@ def add_nodes(tx: Transaction):
 
     # Create skill nodes
     skill_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "skill.csv"),
+        os.path.join(DATA_DIR, 'AMR', 'skill.csv'),
         dtype=str,
-        index_col="id",
-        encoding=ENCODING
+        index_col='id',
     )
 
-    skill_set_1 = set(skill_df["skill"].tolist())
-    skill_set_2 = {i + "_group" for i in skill_df["category"].unique().tolist()}
-
-    skill_set_1 = skill_set_1.union(skill_set_2)
+    skill_set_1 = set(skill_df['skill'].tolist())
+    skill_set_2 = {
+        i
+        for i in skill_df['category'].unique().tolist()
+    }
 
     skill_def = {
         skill: definition
@@ -178,16 +191,22 @@ def add_nodes(tx: Transaction):
         if pd.notna(definition)
     }
 
+    skill_set_1 = skill_set_1.union(skill_set_2)
+
     for skill_name in skill_set_1:
         skill_property = {}
 
-        if pd.notna(skill_name):
-            skill_property["name"] = skill_name
-            if skill_name in skill_def:
-                skill_property['definition'] = skill_def[skill_name]
+        if pd.isna(skill_name):
+            continue
 
-            node_dict["Skill"][skill_name] = Node("Skill", **skill_property)
-            tx.create(node_dict["Skill"][skill_name])
+        skill_property['name'] = skill_name
+        if skill_name in skill_def:
+            skill_property['definition'] = skill_def[skill_name]
+
+        node_dict['Skill'][skill_name] = Node('Skill', **skill_property)
+        tx.create(node_dict['Skill'][skill_name])
+
+    """ ADD MIC DATA """
 
     mic_df = pd.read_csv(
         os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
@@ -201,62 +220,114 @@ def add_nodes(tx: Transaction):
             'Assay ChEMBL ID',
             'Document Year',
             'Document Journal'
-        ],
-        encoding=ENCODING
+        ]
     )
+    mic_df = mic_df.loc[mic_df['strain'].isin(interested_pathogen)]
 
-    # Create chemical nodes
-    chemical_data = mic_df[['Molecule ChEMBL ID', 'NAME']]
-    chemical_data = chemical_data.drop_duplicates()
-    for chembl_id, name in chemical_data.values:
-        chemical_property = {}
+    chembl_to_node_map = {}
 
-        if pd.notna(chembl_id):
-            chemical_property['chembl'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+    if not mic_df.empty:
+        # Create chemical nodes
+        chemical_data = mic_df[['Molecule ChEMBL ID', 'NAME']]
+        chemical_data = chemical_data.drop_duplicates()
+        for chembl_id, name in chemical_data.values:
+            chemical_property = {}
 
-        if pd.notna(name):
-            chemical_property['name'] = name
+            if pd.notna(chembl_id):
+                chemical_property['external link'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
 
-        # Add GRIT42 data here
-        chemical_property["GRIT42"] = f"GRIT42:{random.randint(1000, 9999)}"
+            if pd.notna(name):
+                chemical_property['name'] = name
 
-        node_dict['Chemical'][name] = Node('Chemical', **chemical_property)
-        tx.create(node_dict['Chemical'][name])
+            node_dict['Chemical'][name] = Node('Chemical', **chemical_property)
 
-    # Create pIC50 nodes
-    ic50 = mic_df['pIC50'].unique().tolist()
-    for val in ic50:
-        ic50_property = {}
+            if pd.notna(chembl_id):  # To merge duplicates in chembl
+                chembl_to_node_map[chembl_id] = Node('Chemical', **chemical_property)
 
-        if pd.notna(val):
-            ic50_property['name'] = val
-        node_dict['IC50'][val] = Node('IC50', **ic50_property)
-        tx.create(node_dict['IC50'][val])
+            tx.create(node_dict['Chemical'][name])
 
-    # Add journal information
-    journal_names = mic_df['Document Journal'].unique().tolist()
-    journal_names = ['Assay test' if pd.isna(x) else x for x in journal_names]
+        # Create pIC50 nodes
+        ic50 = mic_df['pIC50'].unique().tolist()
+        for val in ic50:
+            ic50_property = {}
 
-    for name in journal_names:
-        journal_property = {}
+            if pd.notna(val):
+                ic50_property['name'] = val
+            node_dict['IC50'][val] = Node('IC50', **ic50_property)
+            tx.create(node_dict['IC50'][val])
 
-        if pd.notna(name):
-            journal_property['name'] = name
+        # Add journal information
+        journal_names = mic_df['Document Journal'].unique().tolist()
+        journal_names = ['Assay test' if pd.isna(x) else x for x in journal_names]
 
-        node_dict['Journal'][name] = Node('Journal', **journal_property)
-        tx.create(node_dict['Journal'][name])
+        for name in journal_names:
+            journal_property = {}
 
-    # Add journal year
-    publication_years = mic_df['Document Year'].unique().tolist()
+            if pd.notna(name):
+                journal_property['name'] = name
 
-    for year in publication_years:
-        year_property = {}
+            node_dict['Journal'][name] = Node('Journal', **journal_property)
+            tx.create(node_dict['Journal'][name])
 
-        if pd.notna(year):
-            year_property['year'] = year
+        # Add journal year
+        publication_years = mic_df['Document Year'].unique().tolist()
 
-            node_dict['Year'][year] = Node('Year', **year_property)
-            tx.create(node_dict['Year'][year])
+        for year in publication_years:
+            year_property = {}
+
+            if pd.notna(year):
+                year_property['year'] = year
+
+                node_dict['Year'][year] = Node('Year', **year_property)
+                tx.create(node_dict['Year'][year])
+
+    """ ADD SPARK DATA """
+
+    spark_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'SPARK', 'processed_mic_data.tsv'),
+        sep='\t',
+        dtype=str
+    )
+    spark_df = spark_df[spark_df['Curated & Transformed MIC Data: Species'].isin(interested_pathogen)]
+
+    if not spark_df.empty:
+        spark_chemicals = spark_df[['Compound Name', 'SMILES', 'Chembl #', 'pubchem']]
+        spark_chemicals = spark_chemicals.drop_duplicates()
+
+        for spark_id, smiles, chembl_id, pubchem_id in tqdm(spark_chemicals.values):
+
+            chembl_flag = True
+
+            chemical_property = {}
+
+            if pd.notna(chembl_id):
+                if chembl_id in chembl_to_node_map:
+                    chembl_flag = False
+                chemical_property['external link'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+                external_id = chembl_id
+            else:
+                if pd.notna(pubchem_id):
+                    pubchem_id = pubchem_id.split('.')[0]
+                    if pubchem_id in chembl_to_node_map:
+                        chembl_flag = False
+                    chemical_property['external link'] = f'https://pubchem.ncbi.nlm.nih.gov/compound/{pubchem_id}'
+                    external_id = pubchem_id
+            if pd.notna(smiles):
+                chemical_property['smiles'] = smiles
+
+            chemical_property['name'] = spark_id
+
+            if chembl_flag:
+                node_dict['Chemical'][spark_id] = Node('Chemical', **chemical_property)
+                tx.create(node_dict['Chemical'][spark_id])
+            else:
+                earlier_node = chembl_to_node_map[external_id]
+                earlier_node.update({
+                    'smiles': smiles,
+                    'spark_id': spark_id
+                }
+                )
+                tx.graph.push(earlier_node)
 
     return node_dict
 
@@ -265,84 +336,64 @@ def add_relations(
     tx: Transaction,
     df: pd.DataFrame,
     mic_df: pd.DataFrame,
+    spark_df: pd.DataFrame,
     node_mapping_dict: dict
 ):
     """Add relations specific to AMR data. """
 
-    for rows in tqdm(df.values, desc="Populating graph"):
+    for rows in tqdm(df.values, desc='Populating AMR graph'):
         (
-            person_name,
+            first_name,
+            last_name,
+            email,
+            projects,
             institute_name,
-            project_1_name,
-            project_2_name,
-            pathogen_1_name,
-            pathogen_2_name,
-            pathogen_3_name,
-            skill_1_name,
-            skill_2_name,
-            skill_3_name,
-            skill_4_name,
+            orcid,
+            skills_1,
+            skills_2,
+            pathogens,
         ) = rows
 
+        if pd.notna(first_name) and pd.notna(last_name):
+            person_name = first_name.capitalize() + ' ' + last_name.capitalize()
+        else:
+            continue
+
         # Person - [WORKS_AT] -> Institute
-        person_node = node_mapping_dict["Person"][person_name]
-        institute_node = node_mapping_dict["Institute"][institute_name]
-        works_at = Relationship(person_node, "WORKS_AT", institute_node)
+        person_node = node_mapping_dict['Person'][person_name]
+        institute_node = node_mapping_dict['Institute'][institute_name]
+        works_at = Relationship(person_node, 'WORKS_AT', institute_node)
         tx.create(works_at)
 
-        # Peron - [IS_INVOLVED_IN] -> Project + Institute -[SUPERVISES] -> Project
-        if pd.notna(project_1_name):
-            project_1_node = node_mapping_dict["Project"][project_1_name]
-            involved_in = Relationship(person_node, "IS_INVOLVED_IN", project_1_node)
-            tx.create(involved_in)
+        # Person - [IS_INVOLVED_IN] -> Project + Institute -[SUPERVISES] -> Project
+        if pd.notna(projects):
+            for project_name in projects.split(', '):
+                project_node = node_mapping_dict['Project'][project_name]
+                involved_in = Relationship(person_node, 'IS_INVOLVED_IN', project_node)
+                tx.create(involved_in)
 
-            supervises = Relationship(institute_node, "SUPERVISES", project_1_node)
-            tx.create(supervises)
+                supervises = Relationship(institute_node, 'SUPERVISES', project_node)
+                tx.create(supervises)
 
-        if pd.notna(project_2_name) and project_2_name != project_1_name:
-            project_2_node = node_mapping_dict["Project"][project_2_name]
-            involved_in = Relationship(person_node, "IS_INVOLVED_IN", project_2_node)
-            tx.create(involved_in)
+        # Person - [HAS_SKILL] -> Skill
+        if pd.notna(skills_1):
+            for skill_1_name in skills_1.split(', '):
+                skill_1_node = node_mapping_dict['Skill'][skill_1_name]
+                has_skill = Relationship(person_node, 'HAS_SKILL', skill_1_node)
+                tx.create(has_skill)
 
-        # Peron - [HAS_SKILL] -> Skill
-        if pd.notna(skill_1_name):
-            skill_1_node = node_mapping_dict["Skill"][skill_1_name]
-            has_skill = Relationship(person_node, "HAS_SKILL", skill_1_node)
-            tx.create(has_skill)
+        if pd.notna(skills_2):
+            for skill_2_name in skills_2.split(', '):
+                skill_2_node = node_mapping_dict['Skill'][skill_2_name]
+                has_skill = Relationship(person_node, 'HAS_SKILL', skill_2_node)
+                tx.create(has_skill)
 
-        if pd.notna(skill_2_name) and skill_2_name != skill_1_name:
-            skill_2_node = node_mapping_dict["Skill"][skill_2_name]
-            has_skill = Relationship(person_node, "HAS_SKILL", skill_2_node)
-            tx.create(has_skill)
-
-        if (
-            pd.notna(skill_3_name)
-            and skill_3_name != skill_2_name
-            and skill_3_name != skill_1_name
-        ):
-            skill_3_node = node_mapping_dict["Skill"][skill_3_name]
-            has_skill = Relationship(person_node, "HAS_SKILL", skill_3_node)
-            tx.create(has_skill)
-
-        # Peron - [WORKS_WITH] -> Pathogen
-        if pd.notna(pathogen_1_name):
-            pathogen_1_node = node_mapping_dict["Pathogen"][pathogen_1_name]
-            works_with = Relationship(person_node, "WORKS_WITH", pathogen_1_node)
-            tx.create(works_with)
-
-        if pd.notna(pathogen_2_name) and pathogen_2_name != pathogen_1_name:
-            pathogen_2_node = node_mapping_dict["Pathogen"][pathogen_2_name]
-            works_with = Relationship(person_node, "WORKS_WITH", pathogen_2_node)
-            tx.create(works_with)
-
-        if (
-            pd.notna(pathogen_3_name)
-            and pathogen_3_name != pathogen_1_name
-            and pathogen_3_name != pathogen_2_name
-        ):
-            pathogen_3_node = node_mapping_dict["Pathogen"][pathogen_3_name]
-            works_with = Relationship(person_node, "WORKS_WITH", pathogen_3_node)
-            tx.create(works_with)
+        # Person - [WORKS_WITH] -> Pathogen
+        if pd.notna(pathogens):
+            for pathogen_name in pathogens.split(', '):
+                pathogen_node = node_mapping_dict['Pathogen'][pathogen_name]
+                works_with = Relationship(person_node, 'WORKS_WITH', pathogen_node)
+                tx.create(works_with)
 
     for row in tqdm(mic_df.values, desc='Adding MIC relations'):
         (
@@ -354,6 +405,9 @@ def add_relations(
             doc_name,
             doc_year
         ) = row
+
+        if strain not in node_mapping_dict['Pathogen']:  # Omitted as no one works with that strain
+            continue
 
         bact_node = node_mapping_dict['Pathogen'][strain]
         chem_node = node_mapping_dict['Chemical'][chemical]
@@ -388,25 +442,74 @@ def add_relations(
             in_year = Relationship(chem_node, 'IN_YEAR', year_node)
             tx.create(in_year)
 
+    for row in tqdm(spark_df.values, desc='Adding SPARK relations'):
+        (
+            spark_id,
+            smiles,
+            chembl_id,
+            pubmed_id,
+            mic_val,
+            specie,
+            doi,
+            pubchem_id,
+            secondary_chembl_link,  # not used
+        ) = row
+
+        if specie not in node_mapping_dict['Pathogen']:  # Omitted as no one works with that strain
+            continue
+
+        bact_node = node_mapping_dict['Pathogen'][specie]
+        try:
+            chem_node = node_mapping_dict['Chemical'][spark_id]
+        except KeyError:
+            try:
+                if pd.notna(chembl_id):
+                    chem_node = node_mapping_dict['Chemical'][chembl_id]
+                else:
+                    chem_node = node_mapping_dict['Chemical'][pubchem_id.split('.')[0]]
+            except KeyError:
+                continue
+
+        assay_property = {}
+
+        if pd.notna(mic_val):
+            assay_property['mic_values'] = mic_val
+
+        if pd.notna(pubmed_id):
+            assay_property['pubmed_id'] = f'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}/'
+
+        if pd.notna(doi):
+            assay_property['doi'] = doi
+
+        assay_in = Relationship(
+            bact_node,
+            'ASSAY_IN',
+            chem_node,
+            **assay_property
+        )
+        tx.create(assay_in)
+
 
 def add_skill_data(
     tx: Transaction,
     node_mapping_dict: dict
 ):
-    """Add skill category connection to AMR KG."""
+    """Add skill category connection to AMR KG. """
 
     skill_df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "skill.csv"),
-        usecols=["skill", "category"],
-        encoding=ENCODING
+        os.path.join(DATA_DIR, 'AMR', 'skill.csv'),
+        usecols=[
+            'skill',
+            'category'
+        ]
     )
 
-    skill_df["category"] = skill_df["category"].apply(lambda x: x + "_group")
+    # skill_df['category'] = skill_df['category'].apply(lambda x: x + '_group')
 
     for skill_name, skill_class_name in skill_df.values:
-        skill_node = node_mapping_dict["Skill"][skill_name]
-        skill_class_node = node_mapping_dict["Skill"][skill_class_name]
-        includes = Relationship(skill_class_node, "INCLUDES", skill_node)
+        skill_node = node_mapping_dict['Skill'][skill_name]
+        skill_class_node = node_mapping_dict['Skill'][skill_class_name]
+        includes = Relationship(skill_class_node, 'INCLUDES', skill_node)
         tx.create(includes)
 
 
@@ -419,16 +522,15 @@ def add_institute_data(
         os.path.join(DATA_DIR, "AMR", "project.csv"),
         dtype=str,
         index_col="id",
-        encoding=ENCODING
     ).to_dict()["project"]
 
     institute_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "institute.csv"),
         usecols=['institute', 'projects'],
-        encoding=ENCODING
+
     )
 
-    for row in institute_df.values:
+    for row in tqdm(institute_df.values, desc='Populating institute projects'):
         (
             institute_name,
             projects
@@ -460,25 +562,36 @@ def main(argv):
             db_name = arg
 
     tx = populate_db(db_name=db_name)
+
+    # Load the form results
     df = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "person.csv"),
+        f'{DATA_DIR}/AMR/survey_form.tsv',
+        sep='\t',
+        dtype=str,
         usecols=[
-            "contact",
-            "institute",
-            "project_1",
-            "project_2",
-            "pathogen_1",
-            "pathogen_2",
-            "pathogen_3",
-            "skill_1",
-            "skill_2",
-            "skill_3",
-            "skill_4",
+            'First name',
+            'Surname',
+            'Email',
+            'Which project(s) are you involved in?',
+            'Which research institute are you affiliated with?',
+            'ORCID ID (Ex. https://orcid.org/0000-0002-7683-0452)',
+            'Please select the most relevant expertises in DRUG DISCOVERY',
+            'Please select the most relevant expertises in DRUG DEVELOPMENT',
+            'Please choose the appropriate strain(s)'
         ],
         encoding=ENCODING
     )
-
-    df = map_data(data_df=df)
+    df.rename({
+        'First name': 'first_name',
+        'Surname': 'last_name',
+        'Email': 'email',
+        'Which project(s) are you involved in?': 'projects',
+        'Which research institute are you affiliated with?': 'institute',
+        'ORCID ID (Ex. https://orcid.org/0000-0002-7683-0452)': 'orcid',
+        'Please select the most relevant expertises in DRUG DISCOVERY': 'skill_1',
+        'Please select the most relevant expertises in DRUG DEVELOPMENT': 'skill_2',
+        'Please choose the appropriate strain(s)': 'pathogens',
+    })
 
     # Load ChEMBL data
     mic_df = pd.read_csv(
@@ -497,14 +610,22 @@ def main(argv):
         encoding=ENCODING
     )
 
+    # Load SPARK data
+    spark_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'SPARK', 'processed_mic_data.tsv'),
+        sep='\t',
+        dtype=str
+    )
+
     # Add nodes
-    node_map = add_nodes(tx=tx)
+    node_map = add_nodes(data_df=df, tx=tx)
 
     # Add relations
     add_relations(
         tx=tx,
         df=df,
         mic_df=mic_df,
+        spark_df=spark_df,
         node_mapping_dict=node_map
     )
 

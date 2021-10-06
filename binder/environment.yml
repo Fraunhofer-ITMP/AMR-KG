@@ -6,11 +6,11 @@ dependencies:
 - openjdk=11
 - jupyter-server-proxy
 - websockify
+- tqdm
+- pandas
 - pip
 - pip:
    - py2neo==2021.0.1
    - gspread
    - oauth2client
    - pygithub
-   - tqdm
-   - pandas

@@ -4,8 +4,6 @@ channels:
 - defaults
 dependencies:
 - openjdk=11
-- pandas
-- tqdm
 - jupyter-server-proxy
 - websockify
 - pip
@@ -14,3 +12,5 @@ dependencies:
    - gspread
    - oauth2client
    - pygithub
+   - tqdm
+   - pandas

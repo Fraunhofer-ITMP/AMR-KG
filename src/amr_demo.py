@@ -451,15 +451,15 @@ def add_institute_data(
 
 
 def main(argv):
-    db_name = "amr"
+    db_name = "demo"
     try:
         opts, args = getopt.getopt(argv, "hd:", ["db="])
     except getopt.GetoptError:
-        print("kg -id <dbname>")
+        print("amr -id <dbname>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("kg -d <dbname>")
+            print("amr -d <dbname>")
             sys.exit()
         elif opt in ("-d", "--db"):
             db_name = arg

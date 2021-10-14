@@ -451,7 +451,7 @@ def add_institute_data(
 
 
 def main(argv):
-    db_name = "demo"
+    db_name = "amr"
     try:
         opts, args = getopt.getopt(argv, "hd:", ["db="])
     except getopt.GetoptError:

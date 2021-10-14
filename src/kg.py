@@ -45,7 +45,6 @@ def map_data(
     pathogen_dict = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
         dtype=str,
-        index_col="id",
         encoding=ENCODING
     ).to_dict()["pathogen"]
 
@@ -146,7 +145,6 @@ def add_nodes(tx: Transaction):
     pathogen_df = pd.read_csv(
         os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
         dtype=str,
-        index_col="id",
         encoding=ENCODING
     )
 
@@ -190,6 +188,8 @@ def add_nodes(tx: Transaction):
 
             node_dict["Skill"][skill_name] = Node("Skill", **skill_property)
             tx.create(node_dict["Skill"][skill_name])
+
+    """Add ChEMBL data"""
 
     mic_df = pd.read_csv(
         os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
@@ -357,6 +357,9 @@ def add_relations(
             doc_year
         ) = row
 
+        if strain not in node_mapping_dict['Pathogen']:
+            continue
+
         bact_node = node_mapping_dict['Pathogen'][strain]
         chem_node = node_mapping_dict['Chemical'][chemical]
 
@@ -452,11 +455,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hd:", ["db="])
     except getopt.GetoptError:
-        print("amr-script -id <dbname>")
+        print("kg -id <dbname>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("amr-script -d <dbname>")
+            print("kg -d <dbname>")
             sys.exit()
         elif opt in ("-d", "--db"):
             db_name = arg

@@ -13,55 +13,6 @@ from connection import populate_db
 from constants import DATA_DIR, ENCODING
 
 
-def map_data(
-    data_df: pd.DataFrame
-):
-    # Map to institute name
-    institute_dict = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "institute.csv"),
-        dtype=str,
-        index_col="id",
-        encoding=ENCODING
-    ).to_dict()["institute"]
-
-    data_df["institute"] = data_df["institute"].map(institute_dict)
-
-    # Map to project name
-    project_dict = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "project.csv"),
-        dtype=str,
-        index_col="id",
-        encoding=ENCODING
-    ).to_dict()["project"]
-
-    for i in ["project_1", "project_2"]:
-        data_df[i] = data_df[i].map(project_dict)
-
-    # Map to bacterial strain
-    pathogen_dict = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "pathogen.csv"),
-        dtype=str,
-        index_col="id",
-        encoding=ENCODING
-    ).to_dict()["pathogen"]
-
-    for i in ["pathogen_1", "pathogen_2", "pathogen_3"]:
-        data_df[i] = data_df[i].map(pathogen_dict)
-
-    # Map to skill set
-    skill_dict = pd.read_csv(
-        os.path.join(DATA_DIR, "AMR", "skill.csv"),
-        dtype=str,
-        index_col="id",
-        encoding=ENCODING
-    ).to_dict()["skill"]
-
-    for i in ["skill_1", "skill_2", "skill_3", "skill_4"]:
-        data_df[i] = data_df[i].map(skill_dict)
-
-    return data_df
-
-
 def add_nodes(
     data_df: pd.DataFrame,
     tx: Transaction

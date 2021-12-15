@@ -34,3 +34,4 @@ id,contact,email,institute,orcid,project_1,project_2,pathogen_1,pathogen_2,patho
 33,Jean-Karim Ehmann,Jean-Karim.Ehmann@test.de,23,https://orcid.org/0000-0002-7683-0452,3,,3,12,,20,9,,
 34,Carole Hodson,Carole.Hodson@test.de,51,https://orcid.org/0000-0001-7655-2459,1,2,14,13,3,19,37,,
 35,Alexander Messenger,Alexander.Messenger@test.de,12,https://orcid.org/0000-0001-7655-2459,7,,4,10,,1,42,30,
+37,John Smith,John.Smith@test.de,13,https://orcid.org/0000-0001-7655-2459,7,2,4,10,19,1,42,30,

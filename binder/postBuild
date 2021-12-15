@@ -68,6 +68,6 @@ echo "dbms.default_database=amr" >> $CONF_FILE
 
 (${CONDA_DIR}/neo4j-community/bin/neo4j start && sleep 20) | grep "Started neo4j"
 
-python $HOME/src/amr_demo.py
+python $HOME/src/amr.py
 
 ${CONDA_DIR}/neo4j-community/bin/neo4j stop

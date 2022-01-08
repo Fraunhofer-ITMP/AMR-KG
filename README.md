@@ -12,7 +12,7 @@ To visualize the knowledge graph, please click on the icon immediately here belo
     1. Username = neo4j
     2. Password = neo4jbinder 
 
-You are now looged into the KG. Feel free to broswer and play with it!
+You are now looged into the KG. Feel free to browse and play with it!
 
 
 # Partners

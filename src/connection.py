@@ -3,7 +3,6 @@
 import logging
 
 from py2neo import Graph, SystemGraph
-from py2neo.database.work import ClientError
 
 from constants import ADMIN_NAME, ADMIN_PASS, URL
 
@@ -26,7 +25,7 @@ def create_new_user():
                 """CALL dbms.security.createUser("{}", "pass");""".format(name)
             )
             logger.info(f"Added new user {name}")
-        except ClientError:
+        except Exception:
             logger.info("User exists!")
 
 

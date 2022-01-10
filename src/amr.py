@@ -13,9 +13,7 @@ from py2neo.database import Transaction
 from tqdm import tqdm
 
 from connection import populate_db
-from constants import DATA_DIR
-from constants import ENCODING
-from constants import ENGINE
+from constants import DATA_DIR, ENCODING, ENGINE
 
 
 def map_data(

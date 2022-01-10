@@ -12,23 +12,6 @@ logging.basicConfig(level=logging.INFO)
 system_graph = SystemGraph(URL, auth=(ADMIN_NAME, ADMIN_PASS))
 
 
-def create_new_user():
-    """Creates a new user with public roles in the DB."""
-
-    print("SUCCESS: Connected to the Neo4j Database.")
-
-    # TODO: Get name list from the survey sheet
-
-    for name in ["test"]:
-        try:
-            system_graph.run(
-                """CALL dbms.security.createUser("{}", "pass");""".format(name)
-            )
-            logger.info(f"Added new user {name}")
-        except Exception:
-            logger.info("User exists!")
-
-
 def create_new_db(db_name: str):
     """Create a new DB table"""
 

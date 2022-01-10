@@ -2,7 +2,7 @@
 
 To visualize the knowledge graph, please click on the icon immediately here below (first time you do it it will take some minutes, be patient): 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ITeMP-temp/AMR-KG/main?urlpath=desktop)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Fraunhofer-ITMP/AMR-KG/main?urlpath=desktop)
 
 # How to run the KG?
 

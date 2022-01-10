@@ -63,6 +63,9 @@ echo 'dbms.memory.heap.initial_size=512m' >> $CONF_FILE
 echo 'dbms.memory.heap.max_size=512m' >> $CONF_FILE
 echo "dbms.connectors.default_listen_address=0.0.0.0" >> $CONF_FILE
 echo "dbms.default_database=amr" >> $CONF_FILE
+echo "dbms_security_procedures_unrestricted=apoc.,algo." >> $CONF_FILE
+echo "apoc.export.file.enabled=true" >> $CONF_FILE
+echo "apoc.import.file.enabled=true" >> $CONF_FILE
 
 ## populate the default DB in neo4j with python script
 

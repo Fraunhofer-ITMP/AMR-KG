@@ -4,10 +4,10 @@
 
 import getopt
 import os
-import random
 import sys
 
 import pandas as pd
+from pubchempy import Compound
 from py2neo import Node, Relationship
 from py2neo.database import Transaction
 from tqdm import tqdm
@@ -70,6 +70,15 @@ def map_data(
     return data_df
 
 
+def _update_nodes(
+    node_dict: dict,
+    tx: Transaction
+):
+    """Add nodes from dictionary."""
+    for node_type in node_dict:
+        tx.create(node_dict[node_type])
+
+
 def add_nodes(tx: Transaction):
     """Add nodes specific to AMR data"""
 
@@ -79,10 +88,9 @@ def add_nodes(tx: Transaction):
         'Skill': {},
         'Pathogen': {},
         'Project': {},
-        'Year': {},
-        'Chemical': {},
-        'IC50': {},
-        'Journal': {},
+        'ChEMBL': {},
+        'SPARK': {},
+        'PubChem': {},
     }
 
     # Create person nodes
@@ -157,6 +165,15 @@ def add_nodes(tx: Transaction):
         engine=ENGINE
     )
 
+    # List of pathogens from data file
+    interested_pathogen = []
+    for i in pathogen_df['pathogen'].values:
+        if pd.notna(i):
+            p = i.split(', ')
+            interested_pathogen.extend(p)
+
+    interested_pathogen = set(interested_pathogen)
+
     for pathogen_name, taxon_id in pathogen_df.values:
         pathogen_property = {}
 
@@ -164,6 +181,7 @@ def add_nodes(tx: Transaction):
             continue
 
         pathogen_property['name'] = pathogen_name
+        pathogen_property['ncbi id'] = taxon_id
         pathogen_property['info'] = f'https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={taxon_id}'
         node_dict['Pathogen'][pathogen_name] = Node('Pathogen', **pathogen_property)
         tx.create(node_dict['Pathogen'][pathogen_name])
@@ -209,67 +227,107 @@ def add_nodes(tx: Transaction):
             'strain',
             'Molecule ChEMBL ID',
             'NAME',
-            'pIC50',
-            'Assay ChEMBL ID',
-            'Document Year',
-            'Document Journal'
         ],
         encoding=ENCODING,
         engine=ENGINE
     )
 
+    mic_df = mic_df.loc[mic_df['strain'].isin(interested_pathogen)]
+    mic_df.drop('strain', axis=1, inplace=True)
+    mic_df.drop_duplicates(inplace=True)
+
+    chembl_to_node_map = {}
+
     # Create chemical nodes
-    chemical_data = mic_df[['Molecule ChEMBL ID', 'NAME']]
-    chemical_data = chemical_data.drop_duplicates()
-    for chembl_id, name in chemical_data.values:
-        chemical_property = {}
+    if not mic_df.empty:
+        for chembl_id, name in mic_df.values:
+            chemical_property = {}
 
-        if pd.notna(chembl_id):
-            chemical_property['chembl'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+            if pd.notna(chembl_id):
+                chemical_property['ChEMBL ID'] = chembl_id
+                chemical_property['info'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+                chembl_to_node_map[chembl_id] = name  # To merge duplicates in chembl
 
-        if pd.notna(name):
-            chemical_property['name'] = name
+            if pd.notna(name):
+                chemical_property['name'] = name
 
-        # Add GRIT42 data here
-        chemical_property["GRIT42"] = f"GRIT42:{random.randint(1000, 9999)}"
+            node_dict['ChEMBL'][name] = Node('ChEMBL', **chemical_property)
+            tx.create(node_dict['ChEMBL'][name])
 
-        node_dict['Chemical'][name] = Node('Chemical', **chemical_property)
-        tx.create(node_dict['Chemical'][name])
+    """ADD SPARK DATA """
 
-    # Create pIC50 nodes
-    ic50 = mic_df['pIC50'].unique().tolist()
-    for val in ic50:
-        ic50_property = {}
+    spark_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'SPARK', 'processed_mic_data.tsv'),
+        sep='\t',
+        dtype=str,
+        usecols=[
+            'Compound Name',
+            'SMILES',
+            'Curated & Transformed MIC Data: Species',
+            'pubchem',
+            'chembl'
+        ],
+        encoding=ENCODING,
+        engine=ENGINE
+    )
+    spark_df = spark_df[spark_df['Curated & Transformed MIC Data: Species'].isin(interested_pathogen)]
+    spark_df.drop('Curated & Transformed MIC Data: Species', axis=1, inplace=True)
 
-        if pd.notna(val):
-            ic50_property['name'] = val
-        node_dict['IC50'][val] = Node('IC50', **ic50_property)
-        tx.create(node_dict['IC50'][val])
+    spark_df.drop_duplicates(inplace=True)
 
-    # Add journal information
-    journal_names = mic_df['Document Journal'].unique().tolist()
-    journal_names = ['Assay test' if pd.isna(x) else x for x in journal_names]
+    if not spark_df.empty:
+        for spark_id, smiles, pubchem_id, chembl_id in tqdm(spark_df.values):
+            chemical_property = {}
 
-    for name in journal_names:
-        journal_property = {}
+            name = chembl_id  # Set default
 
-        if pd.notna(name):
-            journal_property['name'] = name
+            if pd.notna(pubchem_id):
+                pubchem_id = pubchem_id.split('.')[0]
 
-        node_dict['Journal'][name] = Node('Journal', **journal_property)
-        tx.create(node_dict['Journal'][name])
+            if pd.isna(chembl_id) and pd.isna(pubchem_id):
+                if spark_id in node_dict['SPARK']:
+                    continue
 
-    # Add journal year
-    publication_years = mic_df['Document Year'].unique().tolist()
+                chemical_property.update({
+                    'SPARK ID': spark_id,
+                    'SMILES': smiles
+                })
+                node_dict['SPARK'][spark_id] = Node('SPARK', **chemical_property)
+            elif pd.notna(chembl_id):  # If chembl id exists
+                if pd.notna(spark_id):
+                    chemical_property['Spark ID'] = spark_id
 
-    for year in publication_years:
-        year_property = {}
+                if pd.notna(pubchem_id):
+                    chemical_property['PubChem ID'] = pubchem_id
+                    chemical_property['info'] = f'https://pubchem.ncbi.nlm.nih.gov/compound/{pubchem_id}'
+                    name = Compound.from_cid(pubchem_id).synonyms[0]
 
-        if pd.notna(year):
-            year_property['year'] = year
+                if chembl_id in chembl_to_node_map:
+                    chembl_node_name = chembl_to_node_map[chembl_id]  # Get name of node
+                    node_dict['ChEMBL'][chembl_node_name].update(chemical_property)
+                else:
+                    chemical_property['ChEMBL ID'] = chembl_id
+                    chemical_property['info'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
+                    chemical_property['Name'] = name
+                    node_dict['ChEMBL'][name] = Node('ChEMBL', **chemical_property)
+            else:  # If pubchem id exists
+                name = Compound.from_cid(pubchem_id).iupac_name
 
-            node_dict['Year'][year] = Node('Year', **year_property)
-            tx.create(node_dict['Year'][year])
+                if pubchem_id in node_dict['PubChem']:
+                    continue
+
+                chemical_property['Name'] = name
+                chemical_property['PubChem ID'] = pubchem_id
+                chemical_property['info'] = f'https://pubchem.ncbi.nlm.nih.gov/compound/{pubchem_id}'
+                chemical_property['Spark ID'] = spark_id
+                node_dict['PubChem'][pubchem_id] = Node('PubChem', **chemical_property)
+
+    # Add also updated nodes into graph
+    for node_type in node_dict:
+        _update_nodes(
+            node_dict=node_dict[node_type],
+            tx=tx
+        )
 
     return node_dict
 
@@ -278,6 +336,7 @@ def add_relations(
     tx: Transaction,
     df: pd.DataFrame,
     mic_df: pd.DataFrame,
+    spark_df: pd.DataFrame,
     node_mapping_dict: dict
 ):
     """Add relations specific to AMR data. """
@@ -362,47 +421,76 @@ def add_relations(
             strain,
             chembl_id,  # not needed
             chemical,
-            pval,
             assay_id,
-            doc_name,
-            doc_year
+            mic_val
         ) = row
 
-        if strain not in node_mapping_dict['Pathogen']:
+        if strain not in node_mapping_dict['Pathogen']:  # Omitted as no one works with that strain
             continue
 
         bact_node = node_mapping_dict['Pathogen'][strain]
-        chem_node = node_mapping_dict['Chemical'][chemical]
+        chem_node = node_mapping_dict['ChEMBL'][chemical]
 
         assay_property = {}
         if pd.notna(assay_id):
-            assay_property['assay_info'] = f'https://www.ebi.ac.uk/chembl/assay_report_card/{assay_id}/'
+            assay_property['ChEMBL Assay'] = f'https://www.ebi.ac.uk/chembl/assay_report_card/{assay_id}/'
 
-            assay_in = Relationship(
-                bact_node,
-                'ASSAY_IN',
-                chem_node,
-                **assay_property
-            )
-            tx.create(assay_in)
+        if pd.notna(mic_val):
+            assay_property['MIC'] = mic_val
 
-        if pd.notna(pval):
-            p_node = node_mapping_dict['IC50'][pval]
+        assay_in = Relationship(
+            bact_node,
+            'ASSAY IN',
+            chem_node,
+            **assay_property
+        )
+        tx.create(assay_in)
 
-            has_pic50 = Relationship(chem_node, 'HAS_pIC50', p_node)
-            tx.create(has_pic50)
+    for row in tqdm(spark_df.values, desc='Adding SPARK relations'):
+        (
+            spark_id,
+            smiles,
+            pubmed_id,
+            mic_val,
+            specie,
+            doi,
+            pubchem_id,
+            chembl_id,
+        ) = row
 
-        if pd.notna(doc_name):
-            journal_node = node_mapping_dict['Journal'][doc_name]
+        if specie not in node_mapping_dict['Pathogen']:  # Omitted as no one works with that strain
+            continue
 
-            found_in = Relationship(chem_node, 'FOUND_IN', journal_node)
-            tx.create(found_in)
+        bact_node = node_mapping_dict['Pathogen'][specie]
+        try:
+            chem_node = node_mapping_dict['SPARK'][spark_id]
+        except KeyError:
+            try:
+                if pd.notna(chembl_id):
+                    chem_node = node_mapping_dict['ChEMBL'][chembl_id]
+                else:
+                    chem_node = node_mapping_dict['PubChem'][pubchem_id.split('.')[0]]
+            except KeyError:
+                continue
 
-        if pd.notna(doc_year):
-            year_node = node_mapping_dict['Year'][doc_year]
+        assay_property = {}
 
-            in_year = Relationship(chem_node, 'IN_YEAR', year_node)
-            tx.create(in_year)
+        if pd.notna(mic_val):
+            assay_property['MIC'] = f'{mic_val} microM'
+
+        if pd.notna(pubmed_id):
+            assay_property['Literature'] = f'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}/'
+
+        if pd.notna(doi):
+            assay_property['DOI'] = doi
+
+        assay_in = Relationship(
+            bact_node,
+            'ASSAY IN',
+            chem_node,
+            **assay_property
+        )
+        tx.create(assay_in)
 
 
 def add_skill_data(
@@ -502,21 +590,28 @@ def main(argv):
 
     # Load ChEMBL data
     mic_df = pd.read_csv(
-        os.path.join(DATA_DIR, "MIC", "mic-data.tsv"),
-        sep="\t",
+        os.path.join(DATA_DIR, 'MIC', 'mic-data.tsv'),
+        sep='\t',
         dtype=str,
         usecols=[
-            "strain",
-            "Molecule ChEMBL ID",
-            "NAME",
-            "pIC50",
-            "Assay ChEMBL ID",
-            "Document Year",
-            "Document Journal"
-        ],
-        encoding=ENCODING,
-        engine=ENGINE
+            'strain',
+            'Molecule ChEMBL ID',
+            'NAME',
+            'Standard Value',
+            'Standard Units',
+            'Assay ChEMBL ID',
+        ]
     )
+    mic_df['mic_val'] = mic_df['Standard Value'] + ' ' + mic_df['Standard Units']
+    mic_df.drop(['Standard Value', 'Standard Units'], axis=1, inplace=True)
+
+    # Load SPARK data
+    spark_df = pd.read_csv(
+        os.path.join(DATA_DIR, 'SPARK', 'processed_mic_data.tsv'),
+        sep='\t',
+        dtype=str
+    )
+    spark_df.drop_duplicates(inplace=True)
 
     # Add nodes
     node_map = add_nodes(tx=tx)
@@ -526,6 +621,7 @@ def main(argv):
         tx=tx,
         df=df,
         mic_df=mic_df,
+        spark_df=spark_df,
         node_mapping_dict=node_map
     )
 

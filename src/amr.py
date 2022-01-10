@@ -598,7 +598,9 @@ def main(argv):
             'Standard Value',
             'Standard Units',
             'Assay ChEMBL ID',
-        ]
+        ],
+        encoding=ENCODING,
+        engine=ENGINE
     )
     mic_df['mic_val'] = mic_df['Standard Value'] + ' ' + mic_df['Standard Units']
     mic_df.drop(['Standard Value', 'Standard Units'], axis=1, inplace=True)
@@ -607,7 +609,9 @@ def main(argv):
     spark_df = pd.read_csv(
         os.path.join(DATA_DIR, 'SPARK', 'processed_mic_data.tsv'),
         sep='\t',
-        dtype=str
+        dtype=str,
+        encoding=ENCODING,
+        engine=ENGINE
     )
     spark_df.drop_duplicates(inplace=True)
 

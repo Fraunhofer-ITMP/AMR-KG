@@ -66,6 +66,7 @@ echo "dbms.default_database=amr" >> $CONF_FILE
 echo "dbms_security_procedures_unrestricted=apoc.,algo." >> $CONF_FILE
 echo "apoc.export.file.enabled=true" >> $CONF_FILE
 echo "apoc.import.file.enabled=true" >> $CONF_FILE
+echo "dbms.directories.plugins=${CONDA_DIR}/neo4j-community/labs" >> $CONF_FILE
 
 ## populate the default DB in neo4j with python script
 

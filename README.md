@@ -7,7 +7,7 @@ To visualize the knowledge graph, please click on the icon immediately here belo
 # How to run the KG?
 
 1. Once the binder is loaded, open the Firefox browser
-2. In the broswer, type localhost:7474
+2. In the browser, type localhost:7474
 3. Then enter the following username and password: 
     1. Username = neo4j
     2. Password = neo4jbinder 

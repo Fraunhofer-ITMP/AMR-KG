@@ -2,7 +2,7 @@
   <br>
     AMR Knowledge Graph
     <br>
-   <a href="https://github.com/Fraunhofer-ITMP/AMR-KG/actions?query=workflow%repo2docker">
+   <a href="https://github.com/Fraunhofer-ITMP/AMR-KG/actions/workflows/repo2docker.yml">
     <img src="https://github.com/Fraunhofer-ITMP/SASC/workflows/repo2docker/badge.svg"
          alt="GitHub Actions">
   </a>

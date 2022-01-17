@@ -1,5 +1,17 @@
-# <p align="center"> **AMR Knowledge Graph** </p>
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Fraunhofer-ITMP/AMR-KG/main?urlpath=desktop)
+<h1 align="center">
+  <br>
+    AMR Knowledge Graph
+    <br>
+   <a href="https://github.com/Fraunhofer-ITMP/AMR-KG/actions?query=workflow%repo2docker">
+    <img src="https://github.com/Fraunhofer-ITMP/SASC/workflows/repo2docker/badge.svg"
+         alt="GitHub Actions">
+  </a>
+  <a href="https://mybinder.org/v2/gh/Fraunhofer-ITMP/AMR-KG/main?urlpath=desktop">
+    <img src="https://mybinder.org/badge_logo.svg" alt="AMR-KG">
+  </a>
+  <br>
+</h1>
+</p>
 
 To visualize the knowledge graph, please click on the binder icon above (first time you do it it will take some minutes, be patient).
 

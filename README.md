@@ -11,14 +11,15 @@
   </a>
   <br>
 </h1>
-</p>
 
-To visualize the knowledge graph, please click on the binder icon above (first time you do it it will take some minutes, be patient).
-
-## Introduction
-
+<p align="center">
 This knowledge graph (KG) is an attempt to capture antimicrobial strain related MIC data with help of publically availble resources such as PubChem, ChEMBL, and SPARK data. It
 makes use of FAIR (Findable, Accessible, Interpretable, and Reproducibite) standard for representing data.
+
+**To visualize the knowledge graph, please click on the binder icon above (first time you do it it will take some minutes, be patient).**
+</p>
+
+
 
 ## Ontolgoy overview
 

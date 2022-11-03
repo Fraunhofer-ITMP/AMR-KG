@@ -92,9 +92,11 @@ def add_chembl_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
     """Add ChEMBL Data"""
     for row in tqdm(df.values, desc='Adding MIC relations'):
         (
-            strain,
+            compound_name,
             chembl_id,  # not needed
-            chemical,
+            assay_rel,
+            assay_type,
+            strain,
             assay_id,
             mic_val
         ) = row
@@ -103,14 +105,16 @@ def add_chembl_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
             continue
 
         bact_node = node_mapping_dict['Pathogen'][strain]
-        chem_node = node_mapping_dict['ChEMBL'][chemical]
+        chem_node = node_mapping_dict['ChEMBL'][compound_name]
 
         assay_property = {}
         if pd.notna(assay_id):
             assay_property['ChEMBL Assay'] = f'https://www.ebi.ac.uk/chembl/assay_report_card/{assay_id}/'
 
-        if pd.notna(mic_val):
-            assay_property['MIC'] = mic_val
+        if pd.isna(mic_val) and pd.isna(assay_rel):
+            continue
+
+        assay_property['MIC'] = str(assay_rel) + str(mic_val)
 
         assay_in = Relationship(
             bact_node,
@@ -180,6 +184,7 @@ def add_drug_central_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
         (
             drug_id,
             activity_value,
+            activity_unit,
             activity_type,
             source,
             pathogen
@@ -201,7 +206,7 @@ def add_drug_central_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
         assay_property = {}
 
         if pd.notna(activity_type):
-            assay_property[f'{activity_type}'] = f'{activity_value}'  # TODO: Add unit
+            assay_property[f'{activity_type}'] = f'{activity_value} + {activity_unit}'
 
         if pd.notna(source):
             assay_property['Literature'] = source

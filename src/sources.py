@@ -32,7 +32,7 @@ def add_chembl(interested_pathogen, node_dict, tx):
     chembl_to_node_map = {}
 
     # Create chemical nodes
-    for name, chembl_id in tqdm(mic_df.values):
+    for name, chembl_id in tqdm(mic_df.values, desc='Getting information from ChEMBL 31'):
         chemical_property = {}
 
         if pd.notna(chembl_id):
@@ -43,8 +43,8 @@ def add_chembl(interested_pathogen, node_dict, tx):
         if pd.notna(name):
             chemical_property['name'] = name.title()
 
-        node_dict['ChEMBL'][name] = Node('ChEMBL', **chemical_property)
-        tx.create(node_dict['ChEMBL'][name])
+        node_dict['ChEMBL'][chembl_id] = Node('ChEMBL', **chemical_property)
+        tx.create(node_dict['ChEMBL'][chembl_id])
 
     return node_dict, chembl_to_node_map
 
@@ -105,13 +105,12 @@ def add_spark(
                 name = Compound.from_cid(pubchem_id).synonyms[0]
 
             if chembl_id in chembl_to_node_map:
-                chembl_node_name = chembl_to_node_map[chembl_id]  # Get name of node
-                node_dict['ChEMBL'][chembl_node_name].update(chemical_property)
+                node_dict['ChEMBL'][chembl_id].update(chemical_property)
             else:
                 chemical_property['curie'] = 'chembl' + chembl_id
                 chemical_property['info'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_id}/'
                 chemical_property['name'] = name
-                node_dict['ChEMBL'][name] = Node('ChEMBL', **chemical_property)
+                node_dict['ChEMBL'][chembl_id] = Node('ChEMBL', **chemical_property)
         else:  # If pubchem id exists
             chemical_property['Spark ID'] = 'spark:' + spark_id
             name = Compound.from_cid(pubchem_id).iupac_name
@@ -127,57 +126,123 @@ def add_spark(
     return node_dict
 
 
+def _drug_central_grounding(
+    df: pd.DataFrame,
+):
+    """Method to harmonize and ground the drug bank entities to PubChem and ChEMBL ids"""
+    pubchem_ids = []
+    chembl_ids = []
+    names = []
+
+    for drug_name in tqdm(df['DRUG_NAME'].values, desc='Getting information from DrugCentral'):
+        try:
+            pubchem_id = get_compounds(identifier=drug_name, namespace='name')
+        except Exception:
+            pubchem_ids.append(None)
+            chembl_ids.append(None)
+            names.append(None)
+            continue
+
+        if len(pubchem_id) < 1:
+            pubchem_ids.append(None)
+            chembl_ids.append(None)
+            names.append(None)
+            continue
+
+        pubchem_id = pubchem_id[0].cid
+        pubchem_ids.append(pubchem_id)
+
+        name_list = Compound.from_cid(pubchem_id).synonyms
+        names.append(name_list[0] if len(name_list) > 0 else None)
+
+        chembl_id = [
+            i
+            for i in name_list
+            if i.startswith('CHEMBL')
+        ]
+        chembl_ids.append(chembl_id[0] if len(chembl_id) > 0 else None)
+
+    df['pubchem_id'] = pubchem_ids
+    df['chembl_id'] = chembl_ids
+    df['pubchem compound name'] = names
+
+    df.to_csv(os.path.join(DATA_DIR, 'drug_central', 'drug_target_harmonized.tsv'), sep='\t', index=False)
+
+    return df
+
+
 def add_drug_central(
     node_dict: dict,
+    chembl_to_node_map: dict,
 ):
-    drug_central_df = pd.read_csv(
-        os.path.join(DATA_DIR, 'drug_central', 'drug.target.interaction.tsv'),
-        sep='\t',
-        dtype=str,
-        usecols=[
-            'DRUG_NAME',
-            'STRUCT_ID',
-            'ACT_VALUE',
-            'ACT_UNIT',
-            'ACT_TYPE',
-            'ACT_SOURCE_URL',
-            'ORGANISM'
-        ]
-    )
+    if not os.path.exists(os.path.join(DATA_DIR, 'drug_central', 'drug_target_harmonized.tsv')):
+        drug_central_df = pd.read_csv(
+            os.path.join(DATA_DIR, 'drug_central', 'drug.target.interaction.tsv'),
+            sep='\t',
+            dtype=str,
+            usecols=[
+                'DRUG_NAME',
+                'STRUCT_ID',
+                'ACT_VALUE',
+                'ACT_UNIT',
+                'ACT_TYPE',
+                'ACT_SOURCE_URL',
+                'ORGANISM'
+            ]
+        )
 
-    drug_central_df = drug_central_df[drug_central_df['ORGANISM'].isin(PATHOGEN_MAPPER)]
-    drug_central_df.drop('ORGANISM', axis=1, inplace=True)
-    drug_central_df = drug_central_df[['DRUG_NAME', 'STRUCT_ID']]
-    drug_central_df.drop_duplicates(inplace=True)
+        drug_central_df = drug_central_df[drug_central_df['ORGANISM'].isin(PATHOGEN_MAPPER)]
+        drug_central_df.drop('ORGANISM', axis=1, inplace=True)
+        drug_central_df.drop_duplicates(inplace=True)
 
-    if drug_central_df.empty:
-        return node_dict
+        if drug_central_df.empty:
+            return node_dict
 
-    drug_central_df.to_csv(
-        os.path.join(DATA_DIR, 'drug_central', 'drug_target_filtered.tsv'),
-        sep='\t',
-        index=False
-    )
+        drug_central_df = _drug_central_grounding(df=drug_central_df)
+    else:
+        drug_central_df = pd.read_csv(
+            os.path.join(DATA_DIR, 'drug_central', 'drug_target_harmonized.tsv'),
+            sep='\t',
+            dtype=str
+        )
 
-    for drug_name, drug_central_id in tqdm(drug_central_df.values, desc='Getting information from DrugCentral'):
+    for row in tqdm(drug_central_df.values, desc='Getting information from DrugCentral'):
+        (
+            drug_name,
+            drug_central_id,
+            act_value,
+            act_unit,
+            act_type,
+            act_source,
+            pubchem_idx,
+            chembl_idx,
+            name
+        ) = row
+
         chemical_property = {}
 
-        try:
-            pubchem_ids = get_compounds(identifier=drug_name, namespace='name')
-        except Exception:
-            pubchem_ids = []
+        if pd.notna(chembl_idx):
+            if chembl_idx in chembl_to_node_map:
+                chemical_property['DrugCentral ID'] = 'drug.central:' + str(drug_central_id)
+                if pd.notna(pubchem_idx):
+                    chemical_property['PubChem ID'] = 'pubchem:' + pubchem_idx
 
-        if len(pubchem_ids) > 0:
-            pubchem_id = pubchem_ids[0].cid
-            chemical_property['curie'] = 'pubchem:' + str(pubchem_id)
-            chemical_property['info'] = f'https://pubchem.ncbi.nlm.nih.gov/compound/{pubchem_id}'
-            chemical_property['DrugCentral ID'] = 'drug.central:' + drug_central_id
-            name = Compound.from_cid(pubchem_id).synonyms[0]
+                node_dict['ChEMBL'][chembl_idx].update(chemical_property)
+            else:
+                chemical_property['curie'] = 'chembl:' + chembl_idx
+                chemical_property['info'] = f'https://www.ebi.ac.uk/chembl/compound_report_card/{chembl_idx}/'
+                chemical_property['DrugCentral ID'] = 'drug.central:' + str(drug_central_id)
+                chemical_property['name'] = name
+                node_dict['ChEMBL'][drug_central_id] = Node('ChEMBL', **chemical_property)
+        if pd.notna(pubchem_idx):
+            chemical_property['curie'] = 'pubchem:' + str(pubchem_idx)
+            chemical_property['info'] = f'https://pubchem.ncbi.nlm.nih.gov/compound/{pubchem_idx}'
+            chemical_property['DrugCentral ID'] = 'drug.central:' + str(drug_central_id)
             chemical_property['name'] = name
             node_dict['PubChem'][drug_central_id] = Node('PubChem', **chemical_property)
         else:
-            chemical_property['curie'] = 'drug.central:' + drug_central_id
-            chemical_property['info'] = f'https://drugcentral.org/drugcard/{drug_central_id}'
+            chemical_property['curie'] = 'drug.central:' + str(drug_central_id)
+            chemical_property['info'] = f'https://drugcentral.org/drugcard/{str(drug_central_id)}'
             chemical_property['name'] = drug_name
             node_dict['DrugCentral'][drug_central_id] = Node('DrugCentral', **chemical_property)
 

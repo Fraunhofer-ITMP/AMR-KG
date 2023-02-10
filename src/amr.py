@@ -6,6 +6,7 @@ import getopt
 import os
 import sys
 import datetime
+import logging
 
 import pandas as pd
 from py2neo import Node, Relationship
@@ -17,6 +18,7 @@ from sources import add_chembl, add_spark, add_drug_central
 from relations import add_base_data, add_chembl_data, add_spark_data, add_drug_central_data
 
 pd.set_option('display.max_columns', None)
+logger = logging.getLogger('__name__')
 
 def map_data(
     data_df: pd.DataFrame
@@ -236,7 +238,10 @@ def add_nodes(tx: Transaction):
     )
 
     """Add DrugCentral data"""
-    node_dict = add_drug_central(node_dict=node_dict)
+    node_dict = add_drug_central(
+        node_dict=node_dict,
+        chembl_to_node_map=chembl_to_node_map
+    )
 
     # Add also updated nodes into graph
     for node_type in node_dict:
@@ -244,6 +249,8 @@ def add_nodes(tx: Transaction):
             node_dict=node_dict[node_type],
             tx=tx
         )
+
+    logger.warning(f'Completed node creation!')
 
     return node_dict
 
@@ -419,6 +426,17 @@ def main():
             'ORGANISM',
         ]
     )
+    drug_central_df = drug_central_df.astype({'STRUCT_ID': 'str'})
+
+    dc_chembl_mapper = pd.read_csv(
+        os.path.join(DATA_DIR, 'drug_central', 'drug_target_harmonized.tsv'),
+        sep='\t',
+        dtype=str,
+        usecols=['STRUCT_ID', 'chembl_id'],
+        index_col='STRUCT_ID'
+    ).to_dict()['chembl_id']
+
+    drug_central_df['chembl_id'] = drug_central_df['STRUCT_ID'].map(dc_chembl_mapper)
     drug_central_df.drop_duplicates(inplace=True)
 
     # Add nodes

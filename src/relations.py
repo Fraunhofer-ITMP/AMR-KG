@@ -92,8 +92,8 @@ def add_chembl_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
     """Add ChEMBL Data"""
     for row in tqdm(df.values, desc='Adding MIC relations'):
         (
-            compound_name,
-            chembl_id,  # not needed
+            compound_name, # not needed
+            chembl_id,
             assay_rel,
             assay_type,
             strain,
@@ -105,7 +105,7 @@ def add_chembl_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
             continue
 
         bact_node = node_mapping_dict['Pathogen'][strain]
-        chem_node = node_mapping_dict['ChEMBL'][compound_name]
+        chem_node = node_mapping_dict['ChEMBL'][chembl_id]
 
         assay_property = {}
         if pd.notna(assay_id):
@@ -187,21 +187,26 @@ def add_drug_central_data(df: pd.DataFrame, node_mapping_dict: dict, tx):
             activity_unit,
             activity_type,
             source,
-            pathogen
+            pathogen,
+            chembl_id
         ) = row
+
+        drug_id = str(drug_id)
 
         if pathogen not in node_mapping_dict['Pathogen']:  # Omitted as no one works with that strain
             continue
 
         bact_node = node_mapping_dict['Pathogen'][pathogen]
 
-        try:
+        if pd.notna(chembl_id) and chembl_id in node_mapping_dict['ChEMBL']:
+            chem_node = node_mapping_dict['ChEMBL'][chembl_id]
+        elif pd.notna(chembl_id) and drug_id in node_mapping_dict['ChEMBL']:
+            chem_node = node_mapping_dict['ChEMBL'][drug_id]
+        elif drug_id in node_mapping_dict['PubChem']:
             chem_node = node_mapping_dict['PubChem'][drug_id]
-        except KeyError:
-            try:
-                chem_node = node_mapping_dict['DrugCentral'][drug_id]
-            except KeyError:
-                continue
+        else:
+            assert drug_id in node_mapping_dict['DrugCentral']
+            chem_node = node_mapping_dict['DrugCentral'][drug_id]
 
         assay_property = {}
 

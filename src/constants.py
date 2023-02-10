@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Data paths
-DATA_DIR = "~/data/"
+# DATA_DIR = "~/data/"
+DATA_DIR = '../data'
 
 # Neo4J connectors
-ADMIN_NAME = "neo4j"
-ADMIN_PASS = "neo4jbinder"
+# ADMIN_NAME = "neo4j"
+ADMIN_NAME = 'yojana'
+ADMIN_PASS = 'root'
+# ADMIN_PASS = "neo4jbinder"
 URL = "bolt://localhost:7687"
 ENCODING = 'ISO-8859-1'
 ENGINE = "python"
